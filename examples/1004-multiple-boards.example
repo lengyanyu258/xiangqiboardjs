@@ -1,0 +1,22 @@
+===== id
+1004
+
+===== Name
+Multiple Boards
+
+===== Description
+You can have multiple boards on the same page.
+
+===== HTML
+<div id="board1" class="small-board"></div>
+<div id="board2" class="small-board"></div>
+<div id="board3" class="small-board"></div>
+
+===== JS
+const board1 = Xiangqiboard('board1', 'start');
+
+const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+const board2 = Xiangqiboard('board2', B31);
+
+const C0 = 'r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R';
+const board3 = Xiangqiboard('board3', C0);

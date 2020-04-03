@@ -1,0 +1,25 @@
+===== id
+3003
+
+===== Name
+Clear Board
+
+===== Description
+Use the <a href="docs.html#methods:clear"><code class="js plain">clear</code></a> method to remove all the pieces from the board.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+<button id="startPositionBtn">Start Position</button>
+<button id="clearBoardBtn">Clear Board</button>
+<button id="clearBoardInstantBtn">Clear Board Instant</button>
+
+===== JS
+const board = Xiangqiboard('myBoard', 'start');
+
+$('#startPositionBtn').on('click', board.start);
+
+$('#clearBoardBtn').on('click', board.clear);
+
+$('#clearBoardInstantBtn').on('click', function () {
+  board.clear(false);
+});

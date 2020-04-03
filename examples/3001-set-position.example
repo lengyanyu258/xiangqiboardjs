@@ -1,0 +1,31 @@
+===== id
+3001
+
+===== Name
+Set Position
+
+===== Description
+Use the <a href="docs.html#methods:start"><code class="js plain">start</code></a> and <a href="docs.html#methods:position"><code class="js plain">position</code></a> methods to set the board position.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+<button id="setStartBtn">Start Position</button>
+<button id="setB31Btn">B31</button>
+<button id="setRookCheckmateBtn">Rook Checkmate</button>
+
+===== JS
+const board = Xiangqiboard('myBoard');
+
+$('#setStartBtn').on('click', board.start);
+
+$('#setB31Btn').on('click', function () {
+  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');
+});
+
+$('#setRookCheckmateBtn').on('click', function () {
+  board.position({
+    d8: 'bK',
+    e2: 'rK',
+    d4: 'rR'
+  });
+});

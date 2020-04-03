@@ -1,0 +1,27 @@
+===== id
+2005
+
+===== Name
+Animation Speed
+
+===== Description
+You can control animation speeds with the <a href="docs.html#config:moveSpeed"><code class="js plain">moveSpeed</code></a>, <a href="docs.html#config:snapbackSpeed"><code class="js plain">snapbackSpeed</code></a>, <a href="docs.html#config:snapSpeed"><code class="js plain">snapSpeed</code></a>, and <a href="docs.html#config:trashSpeed"><code class="js plain">trashSpeed</code></a> properties.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+<button id="startBtn">Start Position</button>
+<button id="B31Btn">B31</button>
+
+===== JS
+const board = Xiangqiboard('myBoard', {
+  draggable: true,
+  moveSpeed: 'slow',
+  snapbackSpeed: 500,
+  snapSpeed: 100,
+  position: 'start'
+});
+
+$('#startBtn').on('click', board.start);
+$('#B31Btn').on('click', function () {
+  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');
+});

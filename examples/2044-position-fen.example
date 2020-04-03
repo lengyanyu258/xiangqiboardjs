@@ -1,0 +1,17 @@
+===== id
+2044
+
+===== Name
+Position FEN
+
+===== Description
+You can set the <a href="docs.html#config:position"><code class="js plain">position</code></a> property to a <a href="http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation">FEN</a> string.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+
+===== JS
+const config = {
+  position: 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1'
+};
+const board = Xiangqiboard('myBoard', config);

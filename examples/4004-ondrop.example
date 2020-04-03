@@ -1,0 +1,30 @@
+===== id
+4004
+
+===== Name
+onDrop
+
+===== Description
+The <a href="docs.html#config:onDrop"><code class="js plain">onDrop</code></a> event fires every time a piece is dropped.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+
+===== JS
+function onDrop (source, target, piece, newPos, oldPos, orientation) {
+  console.log('Source: ' + source);
+  console.log('Target: ' + target);
+  console.log('Piece: ' + piece);
+  console.log('New position: ' + Xiangqiboard.objToFen(newPos));
+  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
+  console.log('Orientation: ' + orientation);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDrop: onDrop,
+  sparePieces: true
+};
+const board = Xiangqiboard('myBoard', config);

@@ -1,0 +1,35 @@
+===== id
+4000
+
+===== Name
+onChange
+
+===== Description
+The <a href="docs.html#config:onChange"><code class="js plain">onChange</code></a> event fires when the board position changes.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+<button id="startPositionBtn">Start Position</button>
+<button id="B31Btn">B31</button>
+
+===== JS
+function onChange (oldPos, newPos) {
+  console.log('Position changed:');
+  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
+  console.log('New position: ' + Xiangqiboard.objToFen(newPos));
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onChange: onChange
+};
+const board = Xiangqiboard('myBoard', config);
+
+$('#B31Btn').on('click', function () {
+  const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+  board.position(B31);
+});
+
+$('#startPositionBtn').on('click', board.start);

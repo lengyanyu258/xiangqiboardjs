@@ -1,0 +1,9 @@
+# git diff files
+*.diff
+
+.idea/
+node_modules/
+
+docs/releases/**
+!docs/releases/*/
+!docs/releases/*/*.zip

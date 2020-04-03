@@ -1,0 +1,72 @@
+===== id
+5004
+
+===== Name
+Piece Highlighting 1
+
+===== Description
+Use CSS to show piece highlighting.
+
+===== HTML
+<style type="text/css">
+.highlight-red {
+  box-shadow: inset 0 0 3px 3px yellow;
+}
+.highlight-black {
+  box-shadow: inset 0 0 3px 3px blue;
+}
+</style>
+<div id="myBoard" style="width: 450px"></div>
+
+===== JS
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let $board = $('#myBoard');
+let game = new Xiangqi();
+let squareClass = 'square-2b8ce'
+let squareToHighlight = null;
+let colorToHighlight = null;
+
+function makeRandomMove () {
+  let possibleMoves = game.moves({
+    verbose: true
+  });
+
+  // exit if the game is over
+  if (game.game_over()) return;
+
+  let randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  let move = possibleMoves[randomIdx];
+
+  if (move.color === 'r') {
+    $board.find('.' + squareClass).removeClass('highlight-red');
+    $board.find('.square-' + move.from).addClass('highlight-red');
+    squareToHighlight = move.to;
+    colorToHighlight = 'red';
+  } else {
+    $board.find('.' + squareClass).removeClass('highlight-black');
+    $board.find('.square-' + move.from).addClass('highlight-black');
+    squareToHighlight = move.to;
+    colorToHighlight = 'black';
+  }
+
+  game.move(possibleMoves[randomIdx].iccs);
+  board.position(game.fen());
+
+  window.setTimeout(makeRandomMove, 1200);
+}
+
+function onMoveEnd () {
+  $board.find('.square-' + squareToHighlight)
+    .addClass('highlight-' + colorToHighlight);
+}
+
+let config = {
+  position: 'start',
+  onMoveEnd: onMoveEnd
+};
+board = Xiangqiboard('myBoard', config);
+
+window.setTimeout(makeRandomMove, 500);

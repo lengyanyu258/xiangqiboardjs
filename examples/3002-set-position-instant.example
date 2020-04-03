@@ -1,0 +1,35 @@
+===== id
+3002
+
+===== Name
+Set Position Instantly
+
+===== Description
+Pass <code class="js keyword">false</code> as the second argument to the <a href="docs.html#methods:start"><code class="js plain">start</code></a> and <a href="docs.html#methods:position"><code class="js plain">position</code></a> methods to set the board position instantly.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+<button id="setStartBtn">Start Position</button>
+<button id="setB31Btn">B31</button>
+<button id="setRookCheckmateBtn">Rook Checkmate</button>
+
+===== JS
+const board = Xiangqiboard('myBoard');
+
+$('#setStartBtn').on('click', function () {
+  board.start(false);
+});
+
+$('#setB31Btn').on('click', function () {
+  const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+  board.position(B31, false);
+});
+
+$('#setRookCheckmateBtn').on('click', function () {
+  const rookCheckmate = {
+    d8: 'bK',
+    e2: 'rK',
+    d4: 'rR'
+  };
+  board.position(rookCheckmate, false);
+});

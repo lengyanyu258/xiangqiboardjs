@@ -1,0 +1,34 @@
+===== id
+3005
+
+===== Name
+Orientation
+
+===== Description
+Use the <a href="docs.html#methods:orientation"><code class="js plain">orientation</code></a> method to retrieve and set the orientation. Use the <a href="docs.html#methods:flip"><code class="js plain">flip</code></a> method to flip orientation.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+<button id="showOrientationBtn">Show orientation in console</button>
+<button id="flipOrientationBtn">Flip orientation</button>
+<br />
+<button id="redOrientationBtn">Red orientation</button>
+<button id="blackOrientationBtn">Black orientation</button>
+
+===== JS
+const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+const board = Xiangqiboard('myBoard', B31);
+
+$('#showOrientationBtn').on('click', function () {
+  console.log('Board orientation is: ' + board.orientation());
+});
+
+$('#flipOrientationBtn').on('click', board.flip);
+
+$('#redOrientationBtn').on('click', function () {
+  board.orientation('red');
+});
+
+$('#blackOrientationBtn').on('click', function () {
+  board.orientation('black');
+});

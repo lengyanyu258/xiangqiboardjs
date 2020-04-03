@@ -1,0 +1,28 @@
+===== id
+2030
+
+===== Name
+Piece Theme Function
+
+===== Description
+<a href="docs.html#config:pieceTheme"><code class="js plain">pieceTheme</code></a> can be a function.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+
+===== JS
+function pieceTheme (piece) {
+  // graphic theme for red pieces
+  if (piece.search(/r/) !== -1) {
+    return 'img/xiangqipieces/graphic/' + piece + '.svg';
+  }
+
+  // traditional theme for black pieces
+  return 'img/xiangqipieces/traditional/' + piece + '.svg';
+}
+
+const config = {
+  pieceTheme: pieceTheme,
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);

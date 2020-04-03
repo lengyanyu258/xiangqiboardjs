@@ -1,0 +1,1116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>xiangqiboardjs.com &raquo; Examples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Roboto+Mono">-->
+    <link rel="stylesheet" href="css/website.css" />
+    <link rel="stylesheet" href="css/xiangqiboard.css" />
+</head>
+
+<body>
+<header>
+    <div class="body-width-115f6 flex-c31d5">
+        <div class="left-3edd4">
+            <a class="homepage-link-98a24" href="index.html">xiangqiboardjs<span class="tld-bd9e6">.com</span></a>
+        </div>
+        <div class="right-05ad3">
+            <a href="index.html">Home</a>
+            <a class="active" href="examples.html">Examples</a>
+            <a  href="docs.html">Docs</a>
+            <a  href="download.html">Download</a>
+        </div>
+    </div>
+</header>
+
+
+<main>
+    <div class="body-width-115f6 flex-c31d5 examples-c30bc">
+        <nav class="example-nav-0e953" id="examplesNav"><h4 id="groupHeader-1">Basic Usage</h4><ul id="groupContainer-1" style="display:none"><li id="exampleLink-1000">Empty Board</id><li id="exampleLink-1001">Start Position</id><li id="exampleLink-1002">FEN String</id><li id="exampleLink-1003">Position Object</id><li id="exampleLink-1004">Multiple Boards</id></ul><h4 id="groupHeader-2">Config</h4><ul id="groupContainer-2" style="display:none"><li id="exampleLink-2000">Start Position</id><li id="exampleLink-2044">Position FEN</id><li id="exampleLink-2063">Position Object</id><li id="exampleLink-2001">Orientation</id><li id="exampleLink-2002">Notation</id><li id="exampleLink-2003">Draggable Snapback</id><li id="exampleLink-2082">Draggable Trash</id><li id="exampleLink-2004">Piece Theme String</id><li id="exampleLink-2030">Piece Theme Function</id><li id="exampleLink-2005">Animation Speed</id><li id="exampleLink-2006">Spare Pieces</id></ul><h4 id="groupHeader-3">Methods</h4><ul id="groupContainer-3" style="display:none"><li id="exampleLink-3000">Get Position</id><li id="exampleLink-3001">Set Position</id><li id="exampleLink-3002">Set Position Instantly</id><li id="exampleLink-3003">Clear Board</id><li id="exampleLink-3004">Move Pieces</id><li id="exampleLink-3005">Orientation</id><li id="exampleLink-3006">Destroy Board</id><li id="exampleLink-3007">Resize</id></ul><h4 id="groupHeader-4">Events</h4><ul id="groupContainer-4" style="display:none"><li id="exampleLink-4000">onChange</id><li id="exampleLink-4001">onDragStart</id><li id="exampleLink-4002">onDragStart Prevent Drag</id><li id="exampleLink-4003">onDragMove</id><li id="exampleLink-4004">onDrop</id><li id="exampleLink-4005">onDrop Snapback</id><li id="exampleLink-4006">onDrop Trash</id><li id="exampleLink-4011">onSnapbackEnd</id><li id="exampleLink-4012">onMoveEnd</id></ul><h4 id="groupHeader-5">Integration</h4><ul id="groupContainer-5" style="display:none"><li id="exampleLink-5000">Only Allow Legal Moves</id><li id="exampleLink-5001">Play Random Computer</id><li id="exampleLink-5002">Random vs Random</id><li id="exampleLink-5003">Highlight Legal Moves</id><li id="exampleLink-5004">Piece Highlighting 1</id><li id="exampleLink-5005">Piece Highlighting 2</id></ul></nav>
+        <div class="examples-body-9af4d" id="exampleBodyContainer"></div>
+    </div>
+</main>
+
+<footer>
+    <div class="body-width-115f6 flex-c31d5">
+        <div class="left-3edd4">
+            <p>xiangqiboard.js is released under the <a href="https://github.com/lengyanyu258/xiangqiboardjs/blob/master/LICENSE.md">MIT License</a></p>
+            <p>the code can be found on <a href="https://github.com/lengyanyu258/xiangqiboardjs/">GitHub</a></p>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+window.CHESSBOARD_EXAMPLES = {}
+
+CHESSBOARD_EXAMPLES["1000"] = {
+  description: "Xiangqiboard.js initializes to an empty board with no second argument.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Empty Board",
+  jsStr: "const board = Xiangqiboard('myBoard');",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard');
+  }
+};
+
+CHESSBOARD_EXAMPLES["1001"] = {
+  description: "Pass <code class=\"js string\">'start'</code> as the second argument to initialize\nthe board to the start position.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Start Position",
+  jsStr: "const board = Xiangqiboard('myBoard', 'start');",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard', 'start');
+  }
+};
+
+CHESSBOARD_EXAMPLES["1002"] = {
+  description: "Pass a <a href=\"docs.html#fen_string\">FEN String</a> as the second argument to\ninitialize the board to a specific position.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "FEN String",
+  jsStr: "// B31(Encyclopedia of Chinese Chess Openings, ECCO), 中炮对反宫马\nconst B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\nconst board = Xiangqiboard('myBoard', B31);",
+  jsFn: function () {
+// B31(Encyclopedia of Chinese Chess Openings, ECCO), 中炮对反宫马
+const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+const board = Xiangqiboard('myBoard', B31);
+  }
+};
+
+CHESSBOARD_EXAMPLES["1003"] = {
+  description: "Pass a <a href=\"docs.html#position_object\">Position Object</a> as the second argument to initialize the board to a specific position.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Position Object",
+  jsStr: "const position = {\n  f9: 'bK',\n  e8: 'rP',\n  d1: 'rK'\n};\nconst board = Xiangqiboard('myBoard', position);",
+  jsFn: function () {
+const position = {
+  f9: 'bK',
+  e8: 'rP',
+  d1: 'rK'
+};
+const board = Xiangqiboard('myBoard', position);
+  }
+};
+
+CHESSBOARD_EXAMPLES["1004"] = {
+  description: "You can have multiple boards on the same page.",
+  html: "<div id=\"board1\" class=\"small-board\"></div>\n<div id=\"board2\" class=\"small-board\"></div>\n<div id=\"board3\" class=\"small-board\"></div>",
+  name: "Multiple Boards",
+  jsStr: "const board1 = Xiangqiboard('board1', 'start');\n\nconst B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\nconst board2 = Xiangqiboard('board2', B31);\n\nconst C0 = 'r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R';\nconst board3 = Xiangqiboard('board3', C0);",
+  jsFn: function () {
+const board1 = Xiangqiboard('board1', 'start');
+
+const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+const board2 = Xiangqiboard('board2', B31);
+
+const C0 = 'r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R';
+const board3 = Xiangqiboard('board3', C0);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2000"] = {
+  description: "Set the <a href=\"docs.html#config:position\"><code class=\"js plain\">position</code></a> property to <code class=\"js string\">'start'</code> to initialize the board to the start position.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Start Position",
+  jsStr: "const config = {\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2001"] = {
+  description: "Use the <a href=\"docs.html#config:orientation\"><code class=\"js plain\">orientation</code></a> property to set board orientation.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Orientation",
+  jsStr: "const config = {\n  orientation: 'black',\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  orientation: 'black',
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2002"] = {
+  description: "Use the <a href=\"docs.html#config:showNotation\"><code class=\"js plain\">showNotation</code></a> property to turn board notation on or off.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Notation",
+  jsStr: "const config = {\n  showNotation: true,\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  showNotation: true,
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2003"] = {
+  description: "Set <a href=\"docs.html#config:draggable\"><code class=\"js plain\">draggable</code></a> to <code class='js keyword'>true</code> to allow drag and drop of pieces. Pieces will return to their original square when dropped off the board (ie: the default for <a href=\"docs.html#config:dropOffBoard\"><code class=\"js plain\">dropOffBoard</code></a> is <code class=\"js string\">'snapback'</code>).",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Draggable Snapback",
+  jsStr: "const config = {\n  draggable: true,\n  dropOffBoard: 'snapback', // this is the default\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  draggable: true,
+  dropOffBoard: 'snapback', // this is the default
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2004"] = {
+  description: "Use the <a href=\"docs.html#config:pieceTheme\"><code class=\"js plain\">pieceTheme</code></a> property to set the source of piece images.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Piece Theme String",
+  jsStr: "const config = {\n  pieceTheme: 'img/xiangqipieces/wikipedia/{piece}.svg',\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  pieceTheme: 'img/xiangqipieces/wikipedia/{piece}.svg',
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2005"] = {
+  description: "You can control animation speeds with the <a href=\"docs.html#config:moveSpeed\"><code class=\"js plain\">moveSpeed</code></a>, <a href=\"docs.html#config:snapbackSpeed\"><code class=\"js plain\">snapbackSpeed</code></a>, <a href=\"docs.html#config:snapSpeed\"><code class=\"js plain\">snapSpeed</code></a>, and <a href=\"docs.html#config:trashSpeed\"><code class=\"js plain\">trashSpeed</code></a> properties.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"startBtn\">Start Position</button>\n<button id=\"B31Btn\">B31</button>",
+  name: "Animation Speed",
+  jsStr: "const board = Xiangqiboard('myBoard', {\n  draggable: true,\n  moveSpeed: 'slow',\n  snapbackSpeed: 500,\n  snapSpeed: 100,\n  position: 'start'\n});\n\n$('#startBtn').on('click', board.start);\n$('#B31Btn').on('click', function () {\n  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');\n});",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard', {
+  draggable: true,
+  moveSpeed: 'slow',
+  snapbackSpeed: 500,
+  snapSpeed: 100,
+  position: 'start'
+});
+
+$('#startBtn').on('click', board.start);
+$('#B31Btn').on('click', function () {
+  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');
+});
+  }
+};
+
+CHESSBOARD_EXAMPLES["2006"] = {
+  description: "Set <a href=\"docs.html#config:sparePieces\"><code class=\"js plain\">sparePieces</code></a> to <code class=\"js keyword\">true</code> to show spare pieces that can be dropped onto the board.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"startBtn\">Start Position</button>\n<button id=\"clearBtn\">Clear Board</button>",
+  name: "Spare Pieces",
+  jsStr: "const board = Xiangqiboard('myBoard', {\n  draggable: true,\n  dropOffBoard: 'trash',\n  sparePieces: true,\n  showNotation: true\n});\n\n$('#startBtn').on('click', board.start);\n$('#clearBtn').on('click', board.clear);",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard', {
+  draggable: true,
+  dropOffBoard: 'trash',
+  sparePieces: true,
+  showNotation: true
+});
+
+$('#startBtn').on('click', board.start);
+$('#clearBtn').on('click', board.clear);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2030"] = {
+  description: "<a href=\"docs.html#config:pieceTheme\"><code class=\"js plain\">pieceTheme</code></a> can be a function.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Piece Theme Function",
+  jsStr: "function pieceTheme (piece) {\n  // graphic theme for red pieces\n  if (piece.search(/r/) !== -1) {\n    return 'img/xiangqipieces/graphic/' + piece + '.svg';\n  }\n\n  // traditional theme for black pieces\n  return 'img/xiangqipieces/traditional/' + piece + '.svg';\n}\n\nconst config = {\n  pieceTheme: pieceTheme,\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+function pieceTheme (piece) {
+  // graphic theme for red pieces
+  if (piece.search(/r/) !== -1) {
+    return 'img/xiangqipieces/graphic/' + piece + '.svg';
+  }
+
+  // traditional theme for black pieces
+  return 'img/xiangqipieces/traditional/' + piece + '.svg';
+}
+
+const config = {
+  pieceTheme: pieceTheme,
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2044"] = {
+  description: "You can set the <a href=\"docs.html#config:position\"><code class=\"js plain\">position</code></a> property to a <a href=\"http://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation\">FEN</a> string.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Position FEN",
+  jsStr: "const config = {\n  position: 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  position: 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2063"] = {
+  description: "You can set the <a href=\"docs.html#config:position\"><code class=\"js plain\">position</code></a> property with a <a href=\"docs.html#position_object\">Position Object</a>.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Position Object",
+  jsStr: "const config = {\n  position: {\n    e8: 'rP',\n    f9: 'bK',\n    d1: 'rK'\n  }\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  position: {
+    e8: 'rP',
+    f9: 'bK',
+    d1: 'rK'
+  }
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["2082"] = {
+  description: "Set <a href=\"docs.html#config:dropOffBoard\"><code class=\"js plain\">dropOffBoard</code></a> to <code class='js string'>'trash'</code> to remove pieces when they are dropped outside the board.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Draggable Trash",
+  jsStr: "const config = {\n  draggable: true,\n  dropOffBoard: 'trash',\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+const config = {
+  draggable: true,
+  dropOffBoard: 'trash',
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["3000"] = {
+  description: "Use the <a href=\"docs.html#methods:position\"><code class=\"js plain\">position</code></a> and <a href=\"docs.html#methods:fen\"><code class=\"js plain\">fen</code></a> methods to retrieve the current position of the board.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"showPositionBtn\">Show position in console</button>",
+  name: "Get Position",
+  jsStr: "const config = {\n  draggable: true,\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);\n\nfunction clickShowPositionBtn () {\n  console.log('Current position as an Object:');\n  console.log(board.position());\n\n  console.log('Current position as a FEN string:');\n  console.log(board.fen());\n}\n\n$('#showPositionBtn').on('click', clickShowPositionBtn);",
+  jsFn: function () {
+const config = {
+  draggable: true,
+  position: 'start'
+};
+const board = Xiangqiboard('myBoard', config);
+
+function clickShowPositionBtn () {
+  console.log('Current position as an Object:');
+  console.log(board.position());
+
+  console.log('Current position as a FEN string:');
+  console.log(board.fen());
+}
+
+$('#showPositionBtn').on('click', clickShowPositionBtn);
+  }
+};
+
+CHESSBOARD_EXAMPLES["3001"] = {
+  description: "Use the <a href=\"docs.html#methods:start\"><code class=\"js plain\">start</code></a> and <a href=\"docs.html#methods:position\"><code class=\"js plain\">position</code></a> methods to set the board position.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"setStartBtn\">Start Position</button>\n<button id=\"setB31Btn\">B31</button>\n<button id=\"setRookCheckmateBtn\">Rook Checkmate</button>",
+  name: "Set Position",
+  jsStr: "const board = Xiangqiboard('myBoard');\n\n$('#setStartBtn').on('click', board.start);\n\n$('#setB31Btn').on('click', function () {\n  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');\n});\n\n$('#setRookCheckmateBtn').on('click', function () {\n  board.position({\n    d8: 'bK',\n    e2: 'rK',\n    d4: 'rR'\n  });\n});",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard');
+
+$('#setStartBtn').on('click', board.start);
+
+$('#setB31Btn').on('click', function () {
+  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');
+});
+
+$('#setRookCheckmateBtn').on('click', function () {
+  board.position({
+    d8: 'bK',
+    e2: 'rK',
+    d4: 'rR'
+  });
+});
+  }
+};
+
+CHESSBOARD_EXAMPLES["3002"] = {
+  description: "Pass <code class=\"js keyword\">false</code> as the second argument to the <a href=\"docs.html#methods:start\"><code class=\"js plain\">start</code></a> and <a href=\"docs.html#methods:position\"><code class=\"js plain\">position</code></a> methods to set the board position instantly.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"setStartBtn\">Start Position</button>\n<button id=\"setB31Btn\">B31</button>\n<button id=\"setRookCheckmateBtn\">Rook Checkmate</button>",
+  name: "Set Position Instantly",
+  jsStr: "const board = Xiangqiboard('myBoard');\n\n$('#setStartBtn').on('click', function () {\n  board.start(false);\n});\n\n$('#setB31Btn').on('click', function () {\n  const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\n  board.position(B31, false);\n});\n\n$('#setRookCheckmateBtn').on('click', function () {\n  const rookCheckmate = {\n    d8: 'bK',\n    e2: 'rK',\n    d4: 'rR'\n  };\n  board.position(rookCheckmate, false);\n});",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard');
+
+$('#setStartBtn').on('click', function () {
+  board.start(false);
+});
+
+$('#setB31Btn').on('click', function () {
+  const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+  board.position(B31, false);
+});
+
+$('#setRookCheckmateBtn').on('click', function () {
+  const rookCheckmate = {
+    d8: 'bK',
+    e2: 'rK',
+    d4: 'rR'
+  };
+  board.position(rookCheckmate, false);
+});
+  }
+};
+
+CHESSBOARD_EXAMPLES["3003"] = {
+  description: "Use the <a href=\"docs.html#methods:clear\"><code class=\"js plain\">clear</code></a> method to remove all the pieces from the board.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"startPositionBtn\">Start Position</button>\n<button id=\"clearBoardBtn\">Clear Board</button>\n<button id=\"clearBoardInstantBtn\">Clear Board Instant</button>",
+  name: "Clear Board",
+  jsStr: "const board = Xiangqiboard('myBoard', 'start');\n\n$('#startPositionBtn').on('click', board.start);\n\n$('#clearBoardBtn').on('click', board.clear);\n\n$('#clearBoardInstantBtn').on('click', function () {\n  board.clear(false);\n});",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard', 'start');
+
+$('#startPositionBtn').on('click', board.start);
+
+$('#clearBoardBtn').on('click', board.clear);
+
+$('#clearBoardInstantBtn').on('click', function () {
+  board.clear(false);
+});
+  }
+};
+
+CHESSBOARD_EXAMPLES["3004"] = {
+  description: "Use the <a href=\"docs.html#methods:move\"><code class=\"js plain\">move</code></a> method to make one or more moves on the board.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"startPositionBtn\">Start Position</button>\n<button id=\"move1Btn\">c3-c4</button>\n<button id=\"move2Btn\">h2-e2, h7-e7</button>",
+  name: "Move Pieces",
+  jsStr: "const board = Xiangqiboard('myBoard', 'start');\n\n$('#move1Btn').on('click', function () {\n  board.move('c3-c4');\n});\n\n$('#move2Btn').on('click', function () {\n  board.move('h2-e2', 'h7-e7');\n});\n\n$('#startPositionBtn').on('click', board.start);",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard', 'start');
+
+$('#move1Btn').on('click', function () {
+  board.move('c3-c4');
+});
+
+$('#move2Btn').on('click', function () {
+  board.move('h2-e2', 'h7-e7');
+});
+
+$('#startPositionBtn').on('click', board.start);
+  }
+};
+
+CHESSBOARD_EXAMPLES["3005"] = {
+  description: "Use the <a href=\"docs.html#methods:orientation\"><code class=\"js plain\">orientation</code></a> method to retrieve and set the orientation. Use the <a href=\"docs.html#methods:flip\"><code class=\"js plain\">flip</code></a> method to flip orientation.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"showOrientationBtn\">Show orientation in console</button>\n<button id=\"flipOrientationBtn\">Flip orientation</button>\n<br />\n<button id=\"redOrientationBtn\">Red orientation</button>\n<button id=\"blackOrientationBtn\">Black orientation</button>",
+  name: "Orientation",
+  jsStr: "const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\nconst board = Xiangqiboard('myBoard', B31);\n\n$('#showOrientationBtn').on('click', function () {\n  console.log('Board orientation is: ' + board.orientation());\n});\n\n$('#flipOrientationBtn').on('click', board.flip);\n\n$('#redOrientationBtn').on('click', function () {\n  board.orientation('red');\n});\n\n$('#blackOrientationBtn').on('click', function () {\n  board.orientation('black');\n});",
+  jsFn: function () {
+const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+const board = Xiangqiboard('myBoard', B31);
+
+$('#showOrientationBtn').on('click', function () {
+  console.log('Board orientation is: ' + board.orientation());
+});
+
+$('#flipOrientationBtn').on('click', board.flip);
+
+$('#redOrientationBtn').on('click', function () {
+  board.orientation('red');
+});
+
+$('#blackOrientationBtn').on('click', function () {
+  board.orientation('black');
+});
+  }
+};
+
+CHESSBOARD_EXAMPLES["3006"] = {
+  description: "Use the <a href=\"docs.html#methods:destroy\"><code class=\"js plain\">destroy</code></a> method to kill the board and remove it from the DOM.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"destroyBtn\">Destroy Board</button>",
+  name: "Destroy Board",
+  jsStr: "const board = Xiangqiboard('myBoard', 'start');\n\n$('#destroyBtn').on('click', board.destroy);",
+  jsFn: function () {
+const board = Xiangqiboard('myBoard', 'start');
+
+$('#destroyBtn').on('click', board.destroy);
+  }
+};
+
+CHESSBOARD_EXAMPLES["3007"] = {
+  description: "Use the <a href=\"docs.html#methods:resize\"><code class=\"js plain\">resize</code></a> method to recalculate and redraw the board based on the size of it's parent element. See the full effect of this example in a <a href=\"examples/3007\" target=\"_new\">new window</a>.",
+  html: "<div id=\"myBoard\" style=\"width: 60%\"></div>",
+  name: "Resize",
+  jsStr: "// NOTE: click \"View example in new window.\" to see the full effect of this example\nconst board = Xiangqiboard('myBoard', 'start');\n$(window).resize(board.resize);",
+  jsFn: function () {
+// NOTE: click "View example in new window." to see the full effect of this example
+const board = Xiangqiboard('myBoard', 'start');
+$(window).resize(board.resize);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4000"] = {
+  description: "The <a href=\"docs.html#config:onChange\"><code class=\"js plain\">onChange</code></a> event fires when the board position changes.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"startPositionBtn\">Start Position</button>\n<button id=\"B31Btn\">B31</button>",
+  name: "onChange",
+  jsStr: "function onChange (oldPos, newPos) {\n  console.log('Position changed:');\n  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));\n  console.log('New position: ' + Xiangqiboard.objToFen(newPos));\n  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onChange: onChange\n};\nconst board = Xiangqiboard('myBoard', config);\n\n$('#B31Btn').on('click', function () {\n  const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\n  board.position(B31);\n});\n\n$('#startPositionBtn').on('click', board.start);",
+  jsFn: function () {
+function onChange (oldPos, newPos) {
+  console.log('Position changed:');
+  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
+  console.log('New position: ' + Xiangqiboard.objToFen(newPos));
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onChange: onChange
+};
+const board = Xiangqiboard('myBoard', config);
+
+$('#B31Btn').on('click', function () {
+  const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
+  board.position(B31);
+});
+
+$('#startPositionBtn').on('click', board.start);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4001"] = {
+  description: "The <a href=\"docs.html#config:onDragStart\"><code class=\"js plain\">onDragStart</code></a> event fires every time a piece is picked up.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "onDragStart",
+  jsStr: "function onDragStart (source, piece, position, orientation) {\n  console.log('Drag started:');\n  console.log('Source: ' + source);\n  console.log('Piece: ' + piece);\n  console.log('Position: ' + Xiangqiboard.objToFen(position));\n  console.log('Orientation: ' + orientation);\n  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onDragStart: onDragStart,\n  sparePieces: true\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+function onDragStart (source, piece, position, orientation) {
+  console.log('Drag started:');
+  console.log('Source: ' + source);
+  console.log('Piece: ' + piece);
+  console.log('Position: ' + Xiangqiboard.objToFen(position));
+  console.log('Orientation: ' + orientation);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  sparePieces: true
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4002"] = {
+  description: "Prevent the drag action by returning <code class=\"js keyword\">false</code> from the <a href=\"docs.html#config:onDragStart\"><code class=\"js plain\">onDragStart</code></a> function.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"flipOrientationBtn\">Flip Orientation</button>",
+  name: "onDragStart Prevent Drag",
+  jsStr: "// only allow pieces to be dragged when the board is oriented\n// in their direction\nfunction onDragStart (source, piece, position, orientation) {\n  if ((orientation === 'red' && piece.search(/^r/) === -1) ||\n      (orientation === 'black' && piece.search(/^b/) === -1)) {\n    return false;\n  }\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onDragStart: onDragStart\n};\nconst board = Xiangqiboard('myBoard', config);\n\n$('#flipOrientationBtn').on('click', board.flip);",
+  jsFn: function () {
+// only allow pieces to be dragged when the board is oriented
+// in their direction
+function onDragStart (source, piece, position, orientation) {
+  if ((orientation === 'red' && piece.search(/^r/) === -1) ||
+      (orientation === 'black' && piece.search(/^b/) === -1)) {
+    return false;
+  }
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart
+};
+const board = Xiangqiboard('myBoard', config);
+
+$('#flipOrientationBtn').on('click', board.flip);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4003"] = {
+  description: "The <a href=\"docs.html#config:onDragMove\"><code class=\"js plain\">onDragMove</code></a> event fires every time a piece changes location.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "onDragMove",
+  jsStr: "function onDragMove (newLocation, oldLocation, source,\n                     piece, position, orientation) {\n  console.log('New location: ' + newLocation);\n  console.log('Old location: ' + oldLocation);\n  console.log('Source: ' + source);\n  console.log('Piece: ' + piece);\n  console.log('Position: ' + Xiangqiboard.objToFen(position));\n  console.log('Orientation: ' + orientation);\n  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onDragMove: onDragMove,\n  sparePieces: true\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+function onDragMove (newLocation, oldLocation, source,
+                     piece, position, orientation) {
+  console.log('New location: ' + newLocation);
+  console.log('Old location: ' + oldLocation);
+  console.log('Source: ' + source);
+  console.log('Piece: ' + piece);
+  console.log('Position: ' + Xiangqiboard.objToFen(position));
+  console.log('Orientation: ' + orientation);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDragMove: onDragMove,
+  sparePieces: true
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4004"] = {
+  description: "The <a href=\"docs.html#config:onDrop\"><code class=\"js plain\">onDrop</code></a> event fires every time a piece is dropped.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "onDrop",
+  jsStr: "function onDrop (source, target, piece, newPos, oldPos, orientation) {\n  console.log('Source: ' + source);\n  console.log('Target: ' + target);\n  console.log('Piece: ' + piece);\n  console.log('New position: ' + Xiangqiboard.objToFen(newPos));\n  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));\n  console.log('Orientation: ' + orientation);\n  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onDrop: onDrop,\n  sparePieces: true\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+function onDrop (source, target, piece, newPos, oldPos, orientation) {
+  console.log('Source: ' + source);
+  console.log('Target: ' + target);
+  console.log('Piece: ' + piece);
+  console.log('New position: ' + Xiangqiboard.objToFen(newPos));
+  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
+  console.log('Orientation: ' + orientation);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDrop: onDrop,
+  sparePieces: true
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4005"] = {
+  description: "If <code class=\"js string\">'snapback'</code> is returned from the <a href=\"docs.html#config:onDrop\"><code class=\"js plain\">onDrop</code></a> function, the dragged piece will return to it's source square.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "onDrop Snapback",
+  jsStr: "// snapback black pieces when they are dropped\nfunction onDrop (source, target, piece, newPos, oldPos, orientation) {\n  if (piece.search(/b/) !== -1) {\n    return 'snapback';\n  }\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onDrop: onDrop\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+// snapback black pieces when they are dropped
+function onDrop (source, target, piece, newPos, oldPos, orientation) {
+  if (piece.search(/b/) !== -1) {
+    return 'snapback';
+  }
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDrop: onDrop
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4006"] = {
+  description: "If <code class=\"js string\">'trash'</code> is returned from the <a href=\"docs.html#config:onDrop\"><code class=\"js plain\">onDrop</code></a> function, the dragged piece will be removed.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "onDrop Trash",
+  jsStr: "// trash black pieces when they are dropped\nfunction onDrop (source, target, piece, newPos, oldPos, orientation) {\n  if (piece.search(/b/) !== -1) {\n    return 'trash';\n  }\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onDrop: onDrop\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+// trash black pieces when they are dropped
+function onDrop (source, target, piece, newPos, oldPos, orientation) {
+  if (piece.search(/b/) !== -1) {
+    return 'trash';
+  }
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDrop: onDrop
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4011"] = {
+  description: "The <a href=\"docs.html#config:onSnapbackEnd\"><code class=\"js plain\">onSnapbackEnd</code></a> event fires after a piece has snapped back to it's original square.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "onSnapbackEnd",
+  jsStr: "function onSnapbackEnd (piece, square, position, orientation) {\n  console.log('Piece: ' + piece);\n  console.log('Square: ' + square);\n  console.log('Position: ' + Xiangqiboard.objToFen(position));\n  console.log('Orientation: ' + orientation);\n  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');\n}\n\nconst config = {\n  draggable: true,\n  position: 'start',\n  onSnapbackEnd: onSnapbackEnd\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+function onSnapbackEnd (piece, square, position, orientation) {
+  console.log('Piece: ' + piece);
+  console.log('Square: ' + square);
+  console.log('Position: ' + Xiangqiboard.objToFen(position));
+  console.log('Orientation: ' + orientation);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onSnapbackEnd: onSnapbackEnd
+};
+const board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["4012"] = {
+  description: "The <a href=\"docs.html#config:onMoveEnd\"><code class=\"js plain\">onMoveEnd</code></a> event fires at the end of animations when the board position changes.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<button id=\"startBtn\">Start Position</button>\n<button id=\"clearBtn\">Clear Board</button>\n<button id=\"B31Btn\">B31</button>\n<button id=\"moveBtn\">c3-c4, g6-g5</button>",
+  name: "onMoveEnd",
+  jsStr: "function onMoveEnd (oldPos, newPos) {\n  console.log('Move animation complete:');\n  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));\n  console.log('New position: ' + Xiangqiboard.objToFen(newPos));\n  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');\n}\n\nconst config = {\n  position: 'start',\n  onMoveEnd: onMoveEnd\n};\nconst board = Xiangqiboard('myBoard', config);\n\n$('#B31Btn').on('click', function () {\n  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');\n});\n$('#moveBtn').on('click', function () {\n  board.move('c3-c4', 'g6-g5');\n});\n$('#startBtn').on('click', board.start);\n$('#clearBtn').on('click', board.clear);",
+  jsFn: function () {
+function onMoveEnd (oldPos, newPos) {
+  console.log('Move animation complete:');
+  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
+  console.log('New position: ' + Xiangqiboard.objToFen(newPos));
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  position: 'start',
+  onMoveEnd: onMoveEnd
+};
+const board = Xiangqiboard('myBoard', config);
+
+$('#B31Btn').on('click', function () {
+  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');
+});
+$('#moveBtn').on('click', function () {
+  board.move('c3-c4', 'g6-g5');
+});
+$('#startBtn').on('click', board.start);
+$('#clearBtn').on('click', board.clear);
+  }
+};
+
+CHESSBOARD_EXAMPLES["5000"] = {
+  description: "You can integrate xiangqiboard.js with the <a href=\"https://github.com/lengyanyu258/xiangqi.js\">xiangqi.js</a> library to only allow legal moves.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>\n<label>Status:</label>\n<div id=\"status\"></div>\n<label>FEN:</label>\n<div id=\"fen\"></div>\n<label>PGN:</label>\n<div id=\"pgn\"></div>",
+  name: "Only Allow Legal Moves",
+  jsStr: "// NOTE: this example uses the xiangqi.js library:\n// https://github.com/lengyanyu258/xiangqi.js\n\nlet board = null;\nlet game = new Xiangqi();\nlet $status = $('#status');\nlet $fen = $('#fen');\nlet $pgn = $('#pgn');\n\nfunction onDragStart (source, piece, position, orientation) {\n  // do not pick up pieces if the game is over\n  if (game.game_over()) return false;\n\n  // only pick up pieces for the side to move\n  if ((game.turn() === 'r' && piece.search(/^b/) !== -1) ||\n      (game.turn() === 'b' && piece.search(/^r/) !== -1)) {\n    return false;\n  }\n}\n\nfunction onDrop (source, target) {\n  // see if the move is legal\n  let move = game.move({\n    from: source,\n    to: target,\n    promotion: 'q' // NOTE: always promote to a queen for example simplicity\n  });\n\n  // illegal move\n  if (move === null) return 'snapback';\n\n  updateStatus();\n}\n\n// update the board position after the piece snap\n// for castling, en passant, pawn promotion\nfunction onSnapEnd () {\n  board.position(game.fen());\n}\n\nfunction updateStatus () {\n  let status = '';\n\n  let moveColor = 'Red';\n  if (game.turn() === 'b') {\n    moveColor = 'Black';\n  }\n\n  // checkmate?\n  if (game.in_checkmate()) {\n    status = 'Game over, ' + moveColor + ' is in checkmate.';\n  }\n\n  // draw?\n  else if (game.in_draw()) {\n    status = 'Game over, drawn position';\n  }\n\n  // game still on\n  else {\n    status = moveColor + ' to move';\n\n    // check?\n    if (game.in_check()) {\n      status += ', ' + moveColor + ' is in check';\n    }\n  }\n\n  $status.html(status);\n  $fen.html(game.fen());\n  $pgn.html(game.pgn());\n}\n\nlet config = {\n  draggable: true,\n  position: 'start',\n  onDragStart: onDragStart,\n  onDrop: onDrop,\n  onSnapEnd: onSnapEnd\n};\nboard = Xiangqiboard('myBoard', config);\n\nupdateStatus();",
+  jsFn: function () {
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let game = new Xiangqi();
+let $status = $('#status');
+let $fen = $('#fen');
+let $pgn = $('#pgn');
+
+function onDragStart (source, piece, position, orientation) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false;
+
+  // only pick up pieces for the side to move
+  if ((game.turn() === 'r' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^r/) !== -1)) {
+    return false;
+  }
+}
+
+function onDrop (source, target) {
+  // see if the move is legal
+  let move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  });
+
+  // illegal move
+  if (move === null) return 'snapback';
+
+  updateStatus();
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen());
+}
+
+function updateStatus () {
+  let status = '';
+
+  let moveColor = 'Red';
+  if (game.turn() === 'b') {
+    moveColor = 'Black';
+  }
+
+  // checkmate?
+  if (game.in_checkmate()) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.';
+  }
+
+  // draw?
+  else if (game.in_draw()) {
+    status = 'Game over, drawn position';
+  }
+
+  // game still on
+  else {
+    status = moveColor + ' to move';
+
+    // check?
+    if (game.in_check()) {
+      status += ', ' + moveColor + ' is in check';
+    }
+  }
+
+  $status.html(status);
+  $fen.html(game.fen());
+  $pgn.html(game.pgn());
+}
+
+let config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = Xiangqiboard('myBoard', config);
+
+updateStatus();
+  }
+};
+
+CHESSBOARD_EXAMPLES["5001"] = {
+  description: "You can integrate xiangqiboard.js with the <a href=\"https://github.com/lengyanyu258/xiangqi.js\">xiangqi.js</a> library to play against random moves.",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Play Random Computer",
+  jsStr: "// NOTE: this example uses the xiangqi.js library:\n// https://github.com/lengyanyu258/xiangqi.js\n\nlet board = null;\nlet game = new Xiangqi();\n\nfunction onDragStart (source, piece, position, orientation) {\n  // do not pick up pieces if the game is over\n  if (game.game_over()) return false;\n\n  // only pick up pieces for Red\n  if (piece.search(/^b/) !== -1) return false;\n}\n\nfunction makeRandomMove () {\n  let possibleMoves = game.moves();\n\n  // game over\n  if (possibleMoves.length === 0) return;\n\n  let randomIdx = Math.floor(Math.random() * possibleMoves.length);\n  game.move(possibleMoves[randomIdx]);\n  board.position(game.fen());\n}\n\nfunction onDrop (source, target) {\n  // see if the move is legal\n  let move = game.move({\n    from: source,\n    to: target,\n    promotion: 'q' // NOTE: always promote to a queen for example simplicity\n  });\n\n  // illegal move\n  if (move === null) return 'snapback';\n\n  // make random legal move for black\n  window.setTimeout(makeRandomMove, 250);\n}\n\n// update the board position after the piece snap\n// for castling, en passant, pawn promotion\nfunction onSnapEnd () {\n  board.position(game.fen());\n}\n\nlet config = {\n  draggable: true,\n  position: 'start',\n  onDragStart: onDragStart,\n  onDrop: onDrop,\n  onSnapEnd: onSnapEnd\n};\nboard = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let game = new Xiangqi();
+
+function onDragStart (source, piece, position, orientation) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false;
+
+  // only pick up pieces for Red
+  if (piece.search(/^b/) !== -1) return false;
+}
+
+function makeRandomMove () {
+  let possibleMoves = game.moves();
+
+  // game over
+  if (possibleMoves.length === 0) return;
+
+  let randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  game.move(possibleMoves[randomIdx]);
+  board.position(game.fen());
+}
+
+function onDrop (source, target) {
+  // see if the move is legal
+  let move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  });
+
+  // illegal move
+  if (move === null) return 'snapback';
+
+  // make random legal move for black
+  window.setTimeout(makeRandomMove, 250);
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen());
+}
+
+let config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onSnapEnd: onSnapEnd
+};
+board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["5002"] = {
+  description: "Who will win in this riveting game of <code class=\"js plain\">Math.random()</code> vs <code class=\"js plain\">Math.random()</code>?",
+  html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Random vs Random",
+  jsStr: "// NOTE: this example uses the xiangqi.js library:\n// https://github.com/lengyanyu258/xiangqi.js\n\nlet board = null;\nlet game = new Xiangqi();\n\nfunction makeRandomMove () {\n  let possibleMoves = game.moves();\n\n  // exit if the game is over\n  if (game.game_over()) return;\n\n  let randomIdx = Math.floor(Math.random() * possibleMoves.length);\n  game.move(possibleMoves[randomIdx]);\n  board.position(game.fen());\n\n  window.setTimeout(makeRandomMove, 500);\n}\n\nboard = Xiangqiboard('myBoard', 'start');\n\nwindow.setTimeout(makeRandomMove, 500);",
+  jsFn: function () {
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let game = new Xiangqi();
+
+function makeRandomMove () {
+  let possibleMoves = game.moves();
+
+  // exit if the game is over
+  if (game.game_over()) return;
+
+  let randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  game.move(possibleMoves[randomIdx]);
+  board.position(game.fen());
+
+  window.setTimeout(makeRandomMove, 500);
+}
+
+board = Xiangqiboard('myBoard', 'start');
+
+window.setTimeout(makeRandomMove, 500);
+  }
+};
+
+CHESSBOARD_EXAMPLES["5003"] = {
+  description: "Use the <code class=\"js plain\"><a href=\"docs.html#config:onMouseoverSquare\">onMouseoverSquare</a></code> and <code class=\"js plain\"><a href=\"docs.html#config:onMouseoutSquare\">onMouseoutSquare</a></code> events to highlight legal squares.",
+  html: "<style type=\"text/css\">\n.highlight {\n  box-shadow: inset 0 0 3px 3px white;\n}\n</style>\n<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Highlight Legal Moves",
+  jsStr: "// NOTE: this example uses the xiangqi.js library:\n// https://github.com/lengyanyu258/xiangqi.js\n\nlet board = null;\nlet game = new Xiangqi();\n\nfunction removeGreySquares () {\n  $('#myBoard .square-2b8ce').removeClass('highlight');\n}\n\nfunction greySquare (square) {\n  let $square = $('#myBoard .square-' + square);\n\n  $square.addClass('highlight');\n}\n\nfunction onDragStart (source, piece) {\n  // do not pick up pieces if the game is over\n  if (game.game_over()) return false;\n\n  // or if it's not that side's turn\n  if ((game.turn() === 'r' && piece.search(/^b/) !== -1) ||\n      (game.turn() === 'b' && piece.search(/^r/) !== -1)) {\n    return false;\n  }\n}\n\nfunction onDrop (source, target) {\n  removeGreySquares();\n\n  // see if the move is legal\n  let move = game.move({\n    from: source,\n    to: target\n  });\n\n  // illegal move\n  if (move === null) return 'snapback';\n}\n\nfunction onMouseoverSquare (square, piece) {\n  // get list of possible moves for this square\n  let moves = game.moves({\n    square: square,\n    verbose: true\n  });\n\n  // exit if there are no moves available for this square\n  if (moves.length === 0) return;\n\n  // highlight the square they moused over\n  greySquare(square);\n\n  // highlight the possible squares for this piece\n  for (let i = 0; i < moves.length; i++) {\n    greySquare(moves[i].to);\n  }\n}\n\nfunction onMouseoutSquare (square, piece) {\n  removeGreySquares();\n}\n\nfunction onSnapEnd () {\n  board.position(game.fen());\n}\n\nlet config = {\n  draggable: true,\n  position: 'start',\n  onDragStart: onDragStart,\n  onDrop: onDrop,\n  onMouseoutSquare: onMouseoutSquare,\n  onMouseoverSquare: onMouseoverSquare,\n  onSnapEnd: onSnapEnd\n};\nboard = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let game = new Xiangqi();
+
+function removeGreySquares () {
+  $('#myBoard .square-2b8ce').removeClass('highlight');
+}
+
+function greySquare (square) {
+  let $square = $('#myBoard .square-' + square);
+
+  $square.addClass('highlight');
+}
+
+function onDragStart (source, piece) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false;
+
+  // or if it's not that side's turn
+  if ((game.turn() === 'r' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^r/) !== -1)) {
+    return false;
+  }
+}
+
+function onDrop (source, target) {
+  removeGreySquares();
+
+  // see if the move is legal
+  let move = game.move({
+    from: source,
+    to: target
+  });
+
+  // illegal move
+  if (move === null) return 'snapback';
+}
+
+function onMouseoverSquare (square, piece) {
+  // get list of possible moves for this square
+  let moves = game.moves({
+    square: square,
+    verbose: true
+  });
+
+  // exit if there are no moves available for this square
+  if (moves.length === 0) return;
+
+  // highlight the square they moused over
+  greySquare(square);
+
+  // highlight the possible squares for this piece
+  for (let i = 0; i < moves.length; i++) {
+    greySquare(moves[i].to);
+  }
+}
+
+function onMouseoutSquare (square, piece) {
+  removeGreySquares();
+}
+
+function onSnapEnd () {
+  board.position(game.fen());
+}
+
+let config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onMouseoutSquare: onMouseoutSquare,
+  onMouseoverSquare: onMouseoverSquare,
+  onSnapEnd: onSnapEnd
+};
+board = Xiangqiboard('myBoard', config);
+  }
+};
+
+CHESSBOARD_EXAMPLES["5004"] = {
+  description: "Use CSS to show piece highlighting.",
+  html: "<style type=\"text/css\">\n.highlight-red {\n  box-shadow: inset 0 0 3px 3px yellow;\n}\n.highlight-black {\n  box-shadow: inset 0 0 3px 3px blue;\n}\n</style>\n<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Piece Highlighting 1",
+  jsStr: "// NOTE: this example uses the xiangqi.js library:\n// https://github.com/lengyanyu258/xiangqi.js\n\nlet board = null;\nlet $board = $('#myBoard');\nlet game = new Xiangqi();\nlet squareClass = 'square-2b8ce'\nlet squareToHighlight = null;\nlet colorToHighlight = null;\n\nfunction makeRandomMove () {\n  let possibleMoves = game.moves({\n    verbose: true\n  });\n\n  // exit if the game is over\n  if (game.game_over()) return;\n\n  let randomIdx = Math.floor(Math.random() * possibleMoves.length);\n  let move = possibleMoves[randomIdx];\n\n  if (move.color === 'r') {\n    $board.find('.' + squareClass).removeClass('highlight-red');\n    $board.find('.square-' + move.from).addClass('highlight-red');\n    squareToHighlight = move.to;\n    colorToHighlight = 'red';\n  } else {\n    $board.find('.' + squareClass).removeClass('highlight-black');\n    $board.find('.square-' + move.from).addClass('highlight-black');\n    squareToHighlight = move.to;\n    colorToHighlight = 'black';\n  }\n\n  game.move(possibleMoves[randomIdx].iccs);\n  board.position(game.fen());\n\n  window.setTimeout(makeRandomMove, 1200);\n}\n\nfunction onMoveEnd () {\n  $board.find('.square-' + squareToHighlight)\n    .addClass('highlight-' + colorToHighlight);\n}\n\nlet config = {\n  position: 'start',\n  onMoveEnd: onMoveEnd\n};\nboard = Xiangqiboard('myBoard', config);\n\nwindow.setTimeout(makeRandomMove, 500);",
+  jsFn: function () {
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let $board = $('#myBoard');
+let game = new Xiangqi();
+let squareClass = 'square-2b8ce'
+let squareToHighlight = null;
+let colorToHighlight = null;
+
+function makeRandomMove () {
+  let possibleMoves = game.moves({
+    verbose: true
+  });
+
+  // exit if the game is over
+  if (game.game_over()) return;
+
+  let randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  let move = possibleMoves[randomIdx];
+
+  if (move.color === 'r') {
+    $board.find('.' + squareClass).removeClass('highlight-red');
+    $board.find('.square-' + move.from).addClass('highlight-red');
+    squareToHighlight = move.to;
+    colorToHighlight = 'red';
+  } else {
+    $board.find('.' + squareClass).removeClass('highlight-black');
+    $board.find('.square-' + move.from).addClass('highlight-black');
+    squareToHighlight = move.to;
+    colorToHighlight = 'black';
+  }
+
+  game.move(possibleMoves[randomIdx].iccs);
+  board.position(game.fen());
+
+  window.setTimeout(makeRandomMove, 1200);
+}
+
+function onMoveEnd () {
+  $board.find('.square-' + squareToHighlight)
+    .addClass('highlight-' + colorToHighlight);
+}
+
+let config = {
+  position: 'start',
+  onMoveEnd: onMoveEnd
+};
+board = Xiangqiboard('myBoard', config);
+
+window.setTimeout(makeRandomMove, 500);
+  }
+};
+
+CHESSBOARD_EXAMPLES["5005"] = {
+  description: "Use CSS to show piece highlighting.",
+  html: "<style type=\"text/css\">\n.highlight-red {\n  box-shadow: inset 0 0 3px 3px yellow;\n}\n.highlight-black {\n  box-shadow: inset 0 0 3px 3px blue;\n}\n</style>\n<div id=\"myBoard\" style=\"width: 450px\"></div>",
+  name: "Piece Highlighting 2",
+  jsStr: "// NOTE: this example uses the xiangqi.js library:\n// https://github.com/lengyanyu258/xiangqi.js\n\nlet board = null;\nlet $board = $('#myBoard');\nlet game = new Xiangqi();\nlet squareToHighlight = null;\nlet squareClass = 'square-2b8ce';\n\nfunction removeHighlights (color) {\n  $board.find('.' + squareClass)\n    .removeClass('highlight-' + color);\n}\n\nfunction onDragStart (source, piece, position, orientation) {\n  // do not pick up pieces if the game is over\n  if (game.game_over()) return false;\n\n  // only pick up pieces for Red\n  if (piece.search(/^b/) !== -1) return false;\n}\n\nfunction makeRandomMove () {\n  let possibleMoves = game.moves({\n    verbose: true\n  });\n\n  // game over\n  if (possibleMoves.length === 0) return;\n\n  let randomIdx = Math.floor(Math.random() * possibleMoves.length);\n  let move = possibleMoves[randomIdx];\n  game.move(move.iccs);\n\n  // highlight black's move\n  removeHighlights('black');\n  $board.find('.square-' + move.from).addClass('highlight-black');\n  squareToHighlight = move.to;\n\n  // update the board to the new position\n  board.position(game.fen());\n}\n\nfunction onDrop (source, target) {\n  // see if the move is legal\n  let move = game.move({\n    from: source,\n    to: target,\n    promotion: 'q' // NOTE: always promote to a queen for example simplicity\n  });\n\n  // illegal move\n  if (move === null) return 'snapback';\n\n  // highlight red's move\n  removeHighlights('red');\n  $board.find('.square-' + source).addClass('highlight-red');\n  $board.find('.square-' + target).addClass('highlight-red');\n\n  // make random move for black\n  window.setTimeout(makeRandomMove, 250);\n}\n\nfunction onMoveEnd () {\n  $board.find('.square-' + squareToHighlight)\n    .addClass('highlight-black');\n}\n\n// update the board position after the piece snap\n// for castling, en passant, pawn promotion\nfunction onSnapEnd () {\n  board.position(game.fen());\n}\n\nlet config = {\n  draggable: true,\n  position: 'start',\n  onDragStart: onDragStart,\n  onDrop: onDrop,\n  onMoveEnd: onMoveEnd,\n  onSnapEnd: onSnapEnd\n};\nboard = Xiangqiboard('myBoard', config);",
+  jsFn: function () {
+// NOTE: this example uses the xiangqi.js library:
+// https://github.com/lengyanyu258/xiangqi.js
+
+let board = null;
+let $board = $('#myBoard');
+let game = new Xiangqi();
+let squareToHighlight = null;
+let squareClass = 'square-2b8ce';
+
+function removeHighlights (color) {
+  $board.find('.' + squareClass)
+    .removeClass('highlight-' + color);
+}
+
+function onDragStart (source, piece, position, orientation) {
+  // do not pick up pieces if the game is over
+  if (game.game_over()) return false;
+
+  // only pick up pieces for Red
+  if (piece.search(/^b/) !== -1) return false;
+}
+
+function makeRandomMove () {
+  let possibleMoves = game.moves({
+    verbose: true
+  });
+
+  // game over
+  if (possibleMoves.length === 0) return;
+
+  let randomIdx = Math.floor(Math.random() * possibleMoves.length);
+  let move = possibleMoves[randomIdx];
+  game.move(move.iccs);
+
+  // highlight black's move
+  removeHighlights('black');
+  $board.find('.square-' + move.from).addClass('highlight-black');
+  squareToHighlight = move.to;
+
+  // update the board to the new position
+  board.position(game.fen());
+}
+
+function onDrop (source, target) {
+  // see if the move is legal
+  let move = game.move({
+    from: source,
+    to: target,
+    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+  });
+
+  // illegal move
+  if (move === null) return 'snapback';
+
+  // highlight red's move
+  removeHighlights('red');
+  $board.find('.square-' + source).addClass('highlight-red');
+  $board.find('.square-' + target).addClass('highlight-red');
+
+  // make random move for black
+  window.setTimeout(makeRandomMove, 250);
+}
+
+function onMoveEnd () {
+  $board.find('.square-' + squareToHighlight)
+    .addClass('highlight-black');
+}
+
+// update the board position after the piece snap
+// for castling, en passant, pawn promotion
+function onSnapEnd () {
+  board.position(game.fen());
+}
+
+let config = {
+  draggable: true,
+  position: 'start',
+  onDragStart: onDragStart,
+  onDrop: onDrop,
+  onMoveEnd: onMoveEnd,
+  onSnapEnd: onSnapEnd
+};
+board = Xiangqiboard('myBoard', config);
+  }
+};
+
+
+</script>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/prettify.min.js"></script>
+<script src="js/xiangqiboard.js"></script>
+<script src="js/xiangqi-0.1.3.min.js"></script>
+<script src="js/examples.js"></script>
+</body>
+</html>

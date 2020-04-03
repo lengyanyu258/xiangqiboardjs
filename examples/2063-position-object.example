@@ -1,0 +1,21 @@
+===== id
+2063
+
+===== Name
+Position Object
+
+===== Description
+You can set the <a href="docs.html#config:position"><code class="js plain">position</code></a> property with a <a href="docs.html#position_object">Position Object</a>.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+
+===== JS
+const config = {
+  position: {
+    e8: 'rP',
+    f9: 'bK',
+    d1: 'rK'
+  }
+};
+const board = Xiangqiboard('myBoard', config);

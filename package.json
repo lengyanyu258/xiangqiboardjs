@@ -1,0 +1,22 @@
+{
+  "name": "xiangqiboard",
+  "author": "@lengyanyu258 <lengyanyu258@outlook.com>",
+  "description": "JavaScript xiangqiboard widget",
+  "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lengyanyu258/xiangqiboardjs.git"
+  },
+  "main": "src/xiangqiboard.js",
+  "dependencies": {
+    "jquery": ">=1.8.3"
+  },
+  "devDependencies": {
+    "kidif": "1.1.0",
+    "mustache": "2.3.0",
+    "standard": "10.0.2",
+    "uglify-js": "3.4.8",
+    "clean-css": "4.2.1"
+  },
+  "license": "MIT"
+}

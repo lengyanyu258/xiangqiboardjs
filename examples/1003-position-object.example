@@ -1,0 +1,19 @@
+===== id
+1003
+
+===== Name
+Position Object
+
+===== Description
+Pass a <a href="docs.html#position_object">Position Object</a> as the second argument to initialize the board to a specific position.
+
+===== HTML
+<div id="myBoard" style="width: 450px"></div>
+
+===== JS
+const position = {
+  f9: 'bK',
+  e8: 'rP',
+  d1: 'rK'
+};
+const board = Xiangqiboard('myBoard', position);
