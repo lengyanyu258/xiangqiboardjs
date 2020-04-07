@@ -9,14 +9,14 @@
   },
   "main": "src/xiangqiboard.js",
   "dependencies": {
-    "jquery": "3.4.1"
+    "jquery": "^3.4.1"
   },
   "devDependencies": {
-    "clean-css": "4.2.3",
-    "kidif": "1.1.0",
-    "mustache": "4.0.1",
-    "standard": "14.3.3",
-    "uglify-js": "3.8.1"
+    "clean-css": "^4.2.3",
+    "kidif": "^1.1.0",
+    "mustache": "^4.0.1",
+    "standard": "^14.3.3",
+    "terser": "^4.6.10"
   },
   "license": "MIT"
 }
