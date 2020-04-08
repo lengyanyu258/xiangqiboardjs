@@ -2,6 +2,7 @@
   "name": "xiangqiboard",
   "author": "@lengyanyu258 <lengyanyu258@outlook.com>",
   "description": "JavaScript xiangqiboard widget",
+  "license": "MIT",
   "version": "0.2.0",
   "repository": {
     "type": "git",
@@ -13,10 +14,10 @@
   },
   "devDependencies": {
     "clean-css": "^4.2.3",
+    "fs-plus": "^3.1.1",
     "kidif": "^1.1.0",
     "mustache": "^4.0.1",
     "standard": "^14.3.3",
     "terser": "^4.6.10"
-  },
-  "license": "MIT"
+  }
 }
