@@ -3,15 +3,16 @@
 // -----------------------------------------------------------------------------
 
 // libraries
-const fs = require('fs')
+const fs = require('fs-plus')
 const kidif = require('kidif')
 const mustache = require('mustache')
-const UglifyJS = require('uglify-js')
+const Terser = require('terser')
 const CleanCSS = require('clean-css')
 const docs = require('./data/docs.json')
-const releases = require('./data/releases.json')
+// indicate to object
+const releases = JSON.parse(JSON.stringify(require('./data/releases.json')))
 
-const encoding = {encoding: 'utf8'}
+const encoding = { encoding: 'utf8' }
 
 // grab some mustache templates
 const headTemplate = fs.readFileSync('templates/_head.mustache', encoding)
@@ -68,8 +69,8 @@ $('#startBtn').on('click', board2.start)
 $('#clearBtn').on('click', board2.clear)`.trim()
 
 const RELEASE = (function () {
-  for (const i in releases) {
-    if (!releases.hasOwnProperty(i) || isString(releases[i]) || releases[i].released === false) continue
+  for (let i = 0; i < releases.length; ++i) {
+    if (isString(releases[i]) || releases[i].release === false) continue
     return releases[i]
   }
 })()
@@ -81,10 +82,8 @@ function renderJS (js) {
     .replace(/@VERSION/g, VERSION)
     // remove RUN_ASSERTS
     .replace(/\s*console.assert.+/g, '')
-    .replace(/\s*if\W+RUN_ASSERTS[^}]+}/g, '')  // if (RUN_ASSERTS) {}
+    .replace(/\s*if\W+RUN_ASSERTS[^}]+}/g, '') // if (RUN_ASSERTS) {}
     .replace(/\s*\w*\W*RUN_ASSERTS.+/g, '') // const RUN_ASSERTS = true
-    // required by uglifyJS
-    .replace(/(const|let) /g, 'var ')
 }
 
 function renderCSS (css) {
@@ -107,7 +106,7 @@ function writeSrcFiles () {
     toplevel: true
   }
   const jsInput = renderJS(latestChessboardJS)
-  const jsOutput = UglifyJS.minify(jsInput, jsOptions)
+  const jsOutput = Terser.minify(jsInput, jsOptions)
   const cssInput = renderCSS(latestChessboardCSS)
   const cssOutput = new CleanCSS().minify(cssInput)
 
@@ -118,12 +117,12 @@ function writeSrcFiles () {
   fs.writeFileSync(jsReleaseMinPath, jsOutput.code, encoding)
   fs.writeFileSync(cssReleaseMinPath, cssOutput.styles, encoding)
   // sync to website
-  fs.writeFileSync('docs/js/xiangqiboard.js', fs.readFileSync(jsReleasePath, encoding), encoding)
-  fs.writeFileSync('docs/css/xiangqiboard.css', fs.readFileSync(cssReleasePath, encoding), encoding)
+  fs.writeFileSync('docs/js/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
+  fs.writeFileSync('docs/css/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
 }
 
 function writeHomepage () {
-  const headHTML = mustache.render(headTemplate, {pageTitle: 'Homepage'})
+  const headHTML = mustache.render(headTemplate, { pageTitle: 'Homepage' })
 
   const html = mustache.render(homepageTemplate, {
     head: headHTML,
@@ -136,8 +135,8 @@ function writeHomepage () {
 }
 
 function writeExamplesPage () {
-  const headHTML = mustache.render(headTemplate, {pageTitle: 'Examples'})
-  const headerHTML = mustache.render(headerTemplate, {examplesActive: true})
+  const headHTML = mustache.render(headTemplate, { pageTitle: 'Examples' })
+  const headerHTML = mustache.render(headerTemplate, { examplesActive: true })
 
   const html = mustache.render(examplesTemplate, {
     head: headHTML,
@@ -165,8 +164,8 @@ const errorRowsHTML = docs.errors.reduce(function (html, itm) {
 }, '')
 
 function writeDocsPage () {
-  const headHTML = mustache.render(headTemplate, {pageTitle: 'Documentation'})
-  const headerHTML = mustache.render(headerTemplate, {docsActive: true})
+  const headHTML = mustache.render(headTemplate, { pageTitle: 'Documentation' })
+  const headerHTML = mustache.render(headerTemplate, { docsActive: true })
 
   const html = mustache.render(docsTemplate, {
     head: headHTML,
@@ -185,8 +184,8 @@ const downloadsRowsHTML = releases.reduce(function (html, itm) {
 }, '')
 
 function writeDownloadPage () {
-  const headHTML = mustache.render(headTemplate, {pageTitle: 'Download'})
-  const headerHTML = mustache.render(headerTemplate, {downloadActive: true})
+  const headHTML = mustache.render(headTemplate, { pageTitle: 'Download' })
+  const headerHTML = mustache.render(headerTemplate, { downloadActive: true })
 
   const html = mustache.render(downloadTemplate, {
     head: headHTML,
@@ -437,7 +436,7 @@ function buildMostRecentVersionHTML (page) {
 }
 
 function buildDownloadsRowHTML (release) {
-  if (release.released === false) return ''
+  if (release.release === false) return ''
 
   let html = '<div class="section release">'
 
