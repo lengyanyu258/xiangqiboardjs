@@ -1,17 +1,17 @@
 ;(function () {
-  var $ = window.jQuery
-  var EXAMPLES = window.CHESSBOARD_EXAMPLES
-  var prettyPrint = window.prettyPrint
+  const $ = window.jQuery
+  const EXAMPLES = window.CHESSBOARD_EXAMPLES
+  const prettyPrint = window.prettyPrint
 
   function htmlEscape (str) {
     return (str + '')
-             .replace(/&/g, '&amp;')
-             .replace(/</g, '&lt;')
-             .replace(/>/g, '&gt;')
-             .replace(/"/g, '&quot;')
-             .replace(/'/g, '&#39;')
-             .replace(/\//g, '&#x2F;')
-             .replace(/`/g, '&#x60;')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+      .replace(/\//g, '&#x2F;')
+      .replace(/`/g, '&#x60;')
   }
 
   function highlightGroupHeader (groupIdx) {
@@ -25,7 +25,7 @@
   }
 
   function buildExampleBodyHTML (example) {
-    var html = '<h2>' + htmlEscape(example.name) + '</h2>' +
+    return '<h2>' + htmlEscape(example.name) + '</h2>' +
       // TODO: need to add single example link here
       // '<p><a href=""></a></p>' +
       '<p>' + example.description + '</p>' +
@@ -34,12 +34,10 @@
       '<pre class="prettyprint">' + htmlEscape(example.jsStr) + '</pre>' +
       '<h4>HTML</h4>' +
       '<pre class="prettyprint">' + htmlEscape(example.html) + '</pre>'
-
-    return html
   }
 
   function showExample (exampleId) {
-    var groupIdx = $('#exampleLink-' + exampleId).parent('ul').attr('id').replace('groupContainer-', '')
+    const groupIdx = $('#exampleLink-' + exampleId).parent('ul').attr('id').replace('groupContainer-', '')
 
     $('#groupContainer-' + groupIdx).css('display', '')
     highlightGroupHeader(groupIdx)
@@ -52,7 +50,7 @@
   }
 
   function clickExampleNavLink () {
-    var exampleId = $(this).attr('id').replace('exampleLink-', '')
+    const exampleId = $(this).attr('id').replace('exampleLink-', '')
     if (!EXAMPLES.hasOwnProperty(exampleId)) return
 
     window.location.hash = exampleId
@@ -60,7 +58,7 @@
   }
 
   function loadExampleFromHash () {
-    var exampleId = parseInt(window.location.hash.replace('#', ''), 10)
+    let exampleId = parseInt(window.location.hash.replace('#', ''), 10)
     if (!EXAMPLES.hasOwnProperty(exampleId)) {
       exampleId = 1000
       window.location.hash = exampleId
@@ -69,8 +67,8 @@
   }
 
   function clickGroupHeader () {
-    var groupIdx = $(this).attr('id').replace('groupHeader-', '')
-    var $examplesList = $('#groupContainer-' + groupIdx)
+    const groupIdx = $(this).attr('id').replace('groupHeader-', '')
+    const $examplesList = $('#groupContainer-' + groupIdx)
     if ($examplesList.css('display') === 'none') {
       $examplesList.slideDown('fast')
     } else {
@@ -79,8 +77,9 @@
   }
 
   function init () {
-    $('#examplesNav').on('click', 'li', clickExampleNavLink)
-    $('#examplesNav').on('click', 'h4', clickGroupHeader)
+    const $examplesNav = $('#examplesNav')
+    $examplesNav.on('click', 'li', clickExampleNavLink)
+    $examplesNav.on('click', 'h4', clickGroupHeader)
     loadExampleFromHash()
   }
 

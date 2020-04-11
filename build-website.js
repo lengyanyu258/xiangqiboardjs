@@ -7,9 +7,9 @@ const fs = require('fs-plus')
 const kidif = require('kidif')
 const mustache = require('mustache')
 const Terser = require('terser')
-const CleanCSS = require('clean-css')
+const csso = require('csso')
 const docs = require('./data/docs.json')
-// indicate to object
+// IDE hinted to be treated as an object.
 const releases = JSON.parse(JSON.stringify(require('./data/releases.json')))
 
 const encoding = { encoding: 'utf8' }
@@ -25,6 +25,8 @@ const downloadTemplate = fs.readFileSync('templates/download.mustache', encoding
 
 const latestChessboardJS = fs.readFileSync('src/xiangqiboard.js', encoding)
 const latestChessboardCSS = fs.readFileSync('src/xiangqiboard.css', encoding)
+const latestJQueryMinJS = fs.readFileSync('node_modules/jquery/dist/jquery.min.js', encoding)
+const latestNormalizeCSS = fs.readFileSync('node_modules/normalize.css/normalize.css', encoding)
 
 // grab the examples
 const examplesArr = kidif('examples/*.example')
@@ -56,10 +58,10 @@ const examplesGroups = [
   }
 ]
 
-const homepageExample1 = 'var board1 = Xiangqiboard(\'board1\', \'start\')'
+const homepageExample1 = 'const board1 = Xiangqiboard(\'board1\', \'start\')'
 
 const homepageExample2 = `
-var board2 = Xiangqiboard('board2', {
+const board2 = Xiangqiboard('board2', {
   draggable: true,
   dropOffBoard: 'trash',
   sparePieces: true
@@ -70,7 +72,7 @@ $('#clearBtn').on('click', board2.clear)`.trim()
 
 const RELEASE = (function () {
   for (let i = 0; i < releases.length; ++i) {
-    if (isString(releases[i]) || releases[i].release === false) continue
+    if (isString(releases[i]) || releases[i].released === false) continue
     return releases[i]
   }
 })()
@@ -108,15 +110,17 @@ function writeSrcFiles () {
   const jsInput = renderJS(latestChessboardJS)
   const jsOutput = Terser.minify(jsInput, jsOptions)
   const cssInput = renderCSS(latestChessboardCSS)
-  const cssOutput = new CleanCSS().minify(cssInput)
+  const cssOutput = csso.minify(cssInput)
 
   // .js, .css
   fs.writeFileSync(jsReleasePath, jsInput, encoding)
   fs.writeFileSync(cssReleasePath, cssInput, encoding)
   // .min.js, .min.css
   fs.writeFileSync(jsReleaseMinPath, jsOutput.code, encoding)
-  fs.writeFileSync(cssReleaseMinPath, cssOutput.styles, encoding)
+  fs.writeFileSync(cssReleaseMinPath, cssOutput.css, encoding)
   // sync to website
+  fs.writeFileSync('docs/js/jquery.min.js', latestJQueryMinJS, encoding)
+  fs.writeFileSync('docs/css/normalize.min.css', csso.minify(latestNormalizeCSS).css, encoding)
   fs.writeFileSync('docs/js/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
   fs.writeFileSync('docs/css/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
 }
@@ -242,7 +246,7 @@ function buildExampleGroupHTML (idx, groupName, examplesInGroup) {
 
   examplesInGroup.forEach(function (exampleId) {
     const example = examplesObj[exampleId]
-    html += '<li id="exampleLink-' + exampleId + '">' + example.name + '</id>'
+    html += '<li id="exampleLink-' + exampleId + '">' + example.name + '</li>'
   })
 
   html += '</ul>'
@@ -436,7 +440,7 @@ function buildMostRecentVersionHTML (page) {
 }
 
 function buildDownloadsRowHTML (release) {
-  if (release.release === false) return ''
+  if (release.released === false) return ''
 
   let html = '<div class="section release">'
 
