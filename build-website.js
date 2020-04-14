@@ -136,7 +136,7 @@ function writeHomepage () {
 
   const html = mustache.render(homepageTemplate, {
     head: headHTML,
-    mostRecentVersion: buildMostRecentVersionHTML('Home'),
+    mostRecentVersion: buildMostRecentVersionHTML(),
     footer: footerTemplate,
     example1: homepageExample1,
     example2: homepageExample2
@@ -400,29 +400,9 @@ function buildExamplesCellHTML (examplesIds) {
   return html
 }
 
-function buildMostRecentVersionHTML (page) {
-  let html = ''
-
-  const name = RELEASE.files[0].name
-
-  switch (page) {
-    case 'Home':
-      html += '<a href="releases/' + VERSION + '/' + name + '">Download v' + VERSION + '</a>'
-      break
-    case 'Download':
-      html += '<div class="section">'
-      html += '<h1>Downloads</h1>'
-      html += '<a class="button large radius" href="releases/' + VERSION + '/' + name + '" style="line-height: 22px">'
-      html += 'Download Most Recent Version<br />'
-      html += '<small style="font-weight: normal; font-size: 12px">v' + VERSION + '</small>'
-      html += '</a>'
-      html += '</div>'
-      break
-    default:
-      break
-  }
-
-  return html
+function buildMostRecentVersionHTML () {
+  return '<a href="https://github.com/lengyanyu258/xiangqiboardjs/releases/download/v'
+    + VERSION + '/xiangqiboardjs-' + VERSION + '.zip">Download v' + VERSION + '</a>'
 }
 
 function isString (s) {
