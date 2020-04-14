@@ -127,8 +127,8 @@ function writeSrcFiles () {
   // sync to website
   fs.writeFileSync('docs/js/jquery.min.js', latestJQueryMinJS, encoding)
   fs.writeFileSync('docs/css/normalize.min.css', csso.minify(latestNormalizeCSS).css, encoding)
-  fs.writeFileSync('src/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
-  fs.writeFileSync('src/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
+  fs.writeFileSync('docs/js/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
+  fs.writeFileSync('docs/css/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
 }
 
 function writeHomepage () {
