@@ -3,7 +3,7 @@
  * https://github.com/lengyanyu258/xiangqiboardjs/
  *
  * Copyright (c) 2017, Chris Oakman
- * Copyright (c) 2018, @lengyanyu258
+ * Copyright (c) 2018-2020, @lengyanyu258
  * Released under the MIT license
  * https://github.com/lengyanyu258/xiangqiboardjs/blob/master/LICENSE.md
  */
