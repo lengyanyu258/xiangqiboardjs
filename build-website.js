@@ -21,12 +21,13 @@ const footerTemplate = fs.readFileSync('templates/_footer.mustache', encoding)
 const homepageTemplate = fs.readFileSync('templates/homepage.mustache', encoding)
 const examplesTemplate = fs.readFileSync('templates/examples.mustache', encoding)
 const docsTemplate = fs.readFileSync('templates/docs.mustache', encoding)
-const downloadTemplate = fs.readFileSync('templates/download.mustache', encoding)
 
 const latestChessboardJS = fs.readFileSync('src/xiangqiboard.js', encoding)
 const latestChessboardCSS = fs.readFileSync('src/xiangqiboard.css', encoding)
 const latestJQueryMinJS = fs.readFileSync('node_modules/jquery/dist/jquery.min.js', encoding)
 const latestNormalizeCSS = fs.readFileSync('node_modules/normalize.css/normalize.css', encoding)
+
+const packageFiles = ['./CHANGELOG.md', 'LICENSE.md', 'package.json', 'README.md']
 
 // grab the examples
 const examplesArr = kidif('examples/*.example')
@@ -95,7 +96,7 @@ function renderCSS (css) {
 }
 
 function writeSrcFiles () {
-  const releasePath = './docs/releases/' + VERSION
+  const releasePath = './docs/releases/xiangqiboardjs-' + VERSION
   const jsReleasePath = releasePath + '/js/xiangqiboard-' + VERSION + '.js'
   const jsReleaseMinPath = jsReleasePath.replace(/js$/g, 'min.js')
   const cssReleasePath = releasePath + '/css/xiangqiboard-' + VERSION + '.css'
@@ -112,6 +113,11 @@ function writeSrcFiles () {
   const cssInput = renderCSS(latestChessboardCSS)
   const cssOutput = csso.minify(cssInput)
 
+  // sync to release
+  if (!fs.existsSync(releasePath + '/js')) fs.mkdirSync(releasePath + '/js', { recursive: true })
+  if (!fs.existsSync(releasePath + '/css')) fs.mkdirSync(releasePath + '/css', { recursive: true })
+  // if (!fs.existsSync(releasePath + '/img')) fs.mkdirSync(releasePath + '/img', { recursive: true })
+  packageFiles.forEach(file => {fs.writeFileSync(releasePath + '/' + file, fs.readFileSync(file, encoding), encoding)})
   // .js, .css
   fs.writeFileSync(jsReleasePath, jsInput, encoding)
   fs.writeFileSync(cssReleasePath, cssInput, encoding)
@@ -121,8 +127,8 @@ function writeSrcFiles () {
   // sync to website
   fs.writeFileSync('docs/js/jquery.min.js', latestJQueryMinJS, encoding)
   fs.writeFileSync('docs/css/normalize.min.css', csso.minify(latestNormalizeCSS).css, encoding)
-  fs.writeFileSync('docs/js/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
-  fs.writeFileSync('docs/css/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
+  fs.writeFileSync('src/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
+  fs.writeFileSync('src/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
 }
 
 function writeHomepage () {
@@ -182,31 +188,11 @@ function writeDocsPage () {
   fs.writeFileSync('docs/docs.html', html, encoding)
 }
 
-const downloadsRowsHTML = releases.reduce(function (html, itm) {
-  if (isString(itm)) return html
-  return html + buildDownloadsRowHTML(itm)
-}, '')
-
-function writeDownloadPage () {
-  const headHTML = mustache.render(headTemplate, { pageTitle: 'Download' })
-  const headerHTML = mustache.render(headerTemplate, { downloadActive: true })
-
-  const html = mustache.render(downloadTemplate, {
-    head: headHTML,
-    header: headerHTML,
-    mostRecentVersion: buildMostRecentVersionHTML('Download'),
-    downloadsRows: downloadsRowsHTML,
-    footer: footerTemplate
-  })
-  fs.writeFileSync('docs/download.html', html, encoding)
-}
-
 function writeWebsite () {
   writeSrcFiles()
   writeHomepage()
   writeExamplesPage()
   writeDocsPage()
-  writeDownloadPage()
 }
 
 writeWebsite()
@@ -435,34 +421,6 @@ function buildMostRecentVersionHTML (page) {
     default:
       break
   }
-
-  return html
-}
-
-function buildDownloadsRowHTML (release) {
-  if (release.released === false) return ''
-
-  let html = '<div class="section release">'
-
-  // version and date
-  html += '<h4>v' + release.version + ' <small>released on ' + release.date + '</small></h4>'
-
-  // files
-  html += '<ul>'
-  release.files.forEach(function (file) {
-    html += `<li><a href="releases/${release.version}/${file.name}">${file.name}</a> <small>${file.size}</small></li>`
-  })
-  html += '</ul>'
-
-  // changes
-  html += '<h6>Changes:</h6>'
-  html += '<ul class="disc">'
-  release.changes.forEach(function (change) {
-    html += '<li>' + change + '</li>'
-  })
-  html += '</ul>'
-
-  html += '</div>'
 
   return html
 }
