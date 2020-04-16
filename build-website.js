@@ -8,9 +8,7 @@ const kidif = require('kidif')
 const mustache = require('mustache')
 const Terser = require('terser')
 const csso = require('csso')
-const docs = require('./data/docs.json')
-// IDE hinted to be treated as an object.
-const releases = JSON.parse(JSON.stringify(require('./data/releases.json')))
+const path = require('path')
 
 const encoding = { encoding: 'utf8' }
 
@@ -22,12 +20,18 @@ const homepageTemplate = fs.readFileSync('templates/homepage.mustache', encoding
 const examplesTemplate = fs.readFileSync('templates/examples.mustache', encoding)
 const docsTemplate = fs.readFileSync('templates/docs.mustache', encoding)
 
+// files
 const latestChessboardJS = fs.readFileSync('src/xiangqiboard.js', encoding)
 const latestChessboardCSS = fs.readFileSync('src/xiangqiboard.css', encoding)
 const latestJQueryMinJS = fs.readFileSync('node_modules/jquery/dist/jquery.min.js', encoding)
 const latestNormalizeCSS = fs.readFileSync('node_modules/normalize.css/normalize.css', encoding)
 
-const packageFiles = ['./CHANGELOG.md', 'LICENSE.md', 'package.json', 'README.md']
+const docs = JSON.parse(fs.readFileSync(path.join('docs', 'docs.json'), encoding))
+const changelog = fs.readFileSync('CHANGELOG.md', encoding)
+const packageFiles = ['CHANGELOG.md', 'LICENSE.md', 'package.json', 'README.md']
+const packageImgDirs = [path.join('xiangqiboards', 'wikimedia'),
+  path.join('xiangqipieces', 'graphic'), path.join('xiangqipieces', 'traditional'),
+  path.join('xiangqipieces', 'wikimedia'), path.join('xiangqipieces', 'wikipedia')]
 
 // grab the examples
 const examplesArr = kidif('examples/*.example')
@@ -71,14 +75,10 @@ const board2 = Xiangqiboard('board2', {
 $('#startBtn').on('click', board2.start)
 $('#clearBtn').on('click', board2.clear)`.trim()
 
-const RELEASE = (function () {
-  for (let i = 0; i < releases.length; ++i) {
-    if (isString(releases[i]) || releases[i].released === false) continue
-    return releases[i]
-  }
-})()
-const VERSION = RELEASE.version
-const DATE = RELEASE.date
+// [x.y.z] => x.y.z
+const VERSION = changelog.match(/(?<=\[)[\d.]+?(?=])/)[0]
+// [x.y.z] - yyyy-MM-dd => yyyy-MM-dd
+const DATE = changelog.match(/(?<=[\[\d.\] -]+?)\d{4}-\d{2}-\d{2}/)[0]
 
 function renderJS (js) {
   return (js + '')
@@ -96,11 +96,11 @@ function renderCSS (css) {
 }
 
 function writeSrcFiles () {
-  const releasePath = './docs/releases/xiangqiboardjs-' + VERSION
-  const jsReleasePath = releasePath + '/js/xiangqiboard-' + VERSION + '.js'
-  const jsReleaseMinPath = jsReleasePath.replace(/js$/g, 'min.js')
-  const cssReleasePath = releasePath + '/css/xiangqiboard-' + VERSION + '.css'
-  const cssReleaseMinPath = cssReleasePath.replace(/css$/g, 'min.css')
+  const releasePath = path.join('docs', 'releases', 'xiangqiboardjs-' + VERSION)
+  const jsReleasePath = path.join(releasePath, 'js', 'xiangqiboard-' + VERSION + '.js')
+  const jsReleaseMinPath = jsReleasePath.replace(/js$/, 'min.js')
+  const cssReleasePath = path.join(releasePath, 'css', 'xiangqiboard-' + VERSION + '.css')
+  const cssReleaseMinPath = cssReleasePath.replace(/css$/, 'min.css')
 
   const jsOptions = {
     output: {
@@ -114,10 +114,17 @@ function writeSrcFiles () {
   const cssOutput = csso.minify(cssInput)
 
   // sync to release
-  if (!fs.existsSync(releasePath + '/js')) fs.mkdirSync(releasePath + '/js', { recursive: true })
-  if (!fs.existsSync(releasePath + '/css')) fs.mkdirSync(releasePath + '/css', { recursive: true })
-  // if (!fs.existsSync(releasePath + '/img')) fs.mkdirSync(releasePath + '/img', { recursive: true })
-  packageFiles.forEach(file => {fs.writeFileSync(releasePath + '/' + file, fs.readFileSync(file, encoding), encoding)})
+  if (!fs.existsSync(path.join(releasePath, 'js'))) fs.mkdirSync(path.join(releasePath, 'js'), { recursive: true })
+  if (!fs.existsSync(path.join(releasePath, 'css'))) fs.mkdirSync(path.join(releasePath, 'css'), { recursive: true })
+  packageImgDirs.forEach(dir => {
+    const fromDirPath = path.join('docs', 'img', dir)
+    const toDirPath = path.join(releasePath, 'img', dir)
+    if (!fs.existsSync(toDirPath)) fs.mkdirSync(toDirPath, { recursive: true })
+    fs.readdirSync(fromDirPath).forEach(file => {
+      fs.writeFileSync(path.join(toDirPath, file), fs.readFileSync(path.join(fromDirPath, file), encoding), encoding)
+    })
+  })
+  packageFiles.forEach(file => {fs.writeFileSync(path.join(releasePath, file), fs.readFileSync(file, encoding), encoding)})
   // .js, .css
   fs.writeFileSync(jsReleasePath, jsInput, encoding)
   fs.writeFileSync(cssReleasePath, cssInput, encoding)
@@ -125,10 +132,10 @@ function writeSrcFiles () {
   fs.writeFileSync(jsReleaseMinPath, jsOutput.code, encoding)
   fs.writeFileSync(cssReleaseMinPath, cssOutput.css, encoding)
   // sync to website
-  fs.writeFileSync('docs/js/jquery.min.js', latestJQueryMinJS, encoding)
-  fs.writeFileSync('docs/css/normalize.min.css', csso.minify(latestNormalizeCSS).css, encoding)
-  fs.writeFileSync('docs/js/xiangqiboard.min.js', fs.readFileSync(jsReleaseMinPath, encoding), encoding)
-  fs.writeFileSync('docs/css/xiangqiboard.min.css', fs.readFileSync(cssReleaseMinPath, encoding), encoding)
+  fs.writeFileSync(path.join('docs', 'js', 'jquery.min.js'), latestJQueryMinJS, encoding)
+  fs.writeFileSync(path.join('docs', 'css', 'normalize.min.css'), csso.minify(latestNormalizeCSS).css, encoding)
+  fs.writeFileSync(path.join('docs', 'js', 'xiangqiboard.min.js'), fs.readFileSync(jsReleaseMinPath, encoding), encoding)
+  fs.writeFileSync(path.join('docs', 'css', 'xiangqiboard.min.css'), fs.readFileSync(cssReleaseMinPath, encoding), encoding)
 }
 
 function writeHomepage () {
