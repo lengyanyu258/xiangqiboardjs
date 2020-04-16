@@ -13,20 +13,20 @@ const path = require('path')
 const encoding = { encoding: 'utf8' }
 
 // grab some mustache templates
-const headTemplate = fs.readFileSync('templates/_head.mustache', encoding)
-const headerTemplate = fs.readFileSync('templates/_header.mustache', encoding)
-const footerTemplate = fs.readFileSync('templates/_footer.mustache', encoding)
-const homepageTemplate = fs.readFileSync('templates/homepage.mustache', encoding)
-const examplesTemplate = fs.readFileSync('templates/examples.mustache', encoding)
-const docsTemplate = fs.readFileSync('templates/docs.mustache', encoding)
+const headTemplate = fs.readFileSync(path.join('templates', '_head.mustache'), encoding)
+const headerTemplate = fs.readFileSync(path.join('templates', '_header.mustache'), encoding)
+const footerTemplate = fs.readFileSync(path.join('templates', '_footer.mustache'), encoding)
+const homepageTemplate = fs.readFileSync(path.join('templates', 'homepage.mustache'), encoding)
+const examplesTemplate = fs.readFileSync(path.join('templates', 'examples.mustache'), encoding)
+const docsTemplate = fs.readFileSync(path.join('templates', 'docs.mustache'), encoding)
+const docsJSON = JSON.parse(fs.readFileSync(path.join('templates', 'docs.json'), encoding))
 
 // files
-const latestChessboardJS = fs.readFileSync('src/xiangqiboard.js', encoding)
-const latestChessboardCSS = fs.readFileSync('src/xiangqiboard.css', encoding)
-const latestJQueryMinJS = fs.readFileSync('node_modules/jquery/dist/jquery.min.js', encoding)
-const latestNormalizeCSS = fs.readFileSync('node_modules/normalize.css/normalize.css', encoding)
+const latestChessboardJS = fs.readFileSync(path.join('src', 'xiangqiboard.js'), encoding)
+const latestChessboardCSS = fs.readFileSync(path.join('src', 'xiangqiboard.css'), encoding)
+const latestJQueryMinJS = fs.readFileSync(path.join('node_modules', 'jquery', 'dist', 'jquery.min.js'), encoding)
+const latestNormalizeCSS = fs.readFileSync(path.join('node_modules', 'normalize.css', 'normalize.css'), encoding)
 
-const docs = JSON.parse(fs.readFileSync(path.join('docs', 'docs.json'), encoding))
 const changelog = fs.readFileSync('CHANGELOG.md', encoding)
 const packageFiles = ['CHANGELOG.md', 'LICENSE.md', 'package.json', 'README.md']
 const packageImgDirs = [path.join('xiangqiboards', 'wikimedia'),
@@ -148,7 +148,7 @@ function writeHomepage () {
     example1: homepageExample1,
     example2: homepageExample2
   })
-  fs.writeFileSync('docs/index.html', html, encoding)
+  fs.writeFileSync(path.join('docs', 'index.html'), html, encoding)
 }
 
 function writeExamplesPage () {
@@ -162,20 +162,20 @@ function writeExamplesPage () {
     nav: buildExamplesNavHTML(),
     examplesJavaScript: buildExamplesJS()
   })
-  fs.writeFileSync('docs/examples.html', html, encoding)
+  fs.writeFileSync(path.join('docs', 'examples.html'), html, encoding)
 }
 
-const configTableRowsHTML = docs.config.reduce(function (html, itm) {
+const configTableRowsHTML = docsJSON.config.reduce(function (html, itm) {
   if (isString(itm)) return html
   return html + buildConfigDocsTableRowHTML('config', itm)
 }, '')
 
-const methodTableRowsHTML = docs.methods.reduce(function (html, itm) {
+const methodTableRowsHTML = docsJSON.methods.reduce(function (html, itm) {
   if (isString(itm)) return html
   return html + buildMethodRowHTML(itm)
 }, '')
 
-const errorRowsHTML = docs.errors.reduce(function (html, itm) {
+const errorRowsHTML = docsJSON.errors.reduce(function (html, itm) {
   if (isString(itm)) return html
   return html + buildErrorRowHTML(itm)
 }, '')
