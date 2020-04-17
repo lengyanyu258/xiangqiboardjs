@@ -95,6 +95,17 @@ function renderCSS (css) {
     .replace(/\$date\$/g, DATE)
 }
 
+function syncImgDirs (targetTopPath) {
+  packageImgDirs.forEach(dir => {
+    const fromDirPath = path.join('docs', 'img', dir)
+    const toDirPath = path.join(targetTopPath, 'img', dir)
+    if (!fs.existsSync(toDirPath)) fs.mkdirSync(toDirPath, { recursive: true })
+    fs.readdirSync(fromDirPath).forEach(file => {
+      fs.writeFileSync(path.join(toDirPath, file), fs.readFileSync(path.join(fromDirPath, file), encoding), encoding)
+    })
+  })
+}
+
 function writeSrcFiles () {
   const releasePath = path.join('releases', 'xiangqiboardjs-' + VERSION)
   const jsReleasePath = path.join(releasePath, 'js', 'xiangqiboard-' + VERSION + '.js')
@@ -116,14 +127,7 @@ function writeSrcFiles () {
   // sync to release
   if (!fs.existsSync(path.join(releasePath, 'js'))) fs.mkdirSync(path.join(releasePath, 'js'), { recursive: true })
   if (!fs.existsSync(path.join(releasePath, 'css'))) fs.mkdirSync(path.join(releasePath, 'css'), { recursive: true })
-  packageImgDirs.forEach(dir => {
-    const fromDirPath = path.join('docs', 'img', dir)
-    const toDirPath = path.join(releasePath, 'img', dir)
-    if (!fs.existsSync(toDirPath)) fs.mkdirSync(toDirPath, { recursive: true })
-    fs.readdirSync(fromDirPath).forEach(file => {
-      fs.writeFileSync(path.join(toDirPath, file), fs.readFileSync(path.join(fromDirPath, file), encoding), encoding)
-    })
-  })
+  syncImgDirs(releasePath)
   packageFiles.forEach(file => {fs.writeFileSync(path.join(releasePath, file), fs.readFileSync(file, encoding), encoding)})
   // .js, .css
   fs.writeFileSync(jsReleasePath, jsInput, encoding)
@@ -131,6 +135,12 @@ function writeSrcFiles () {
   // .min.js, .min.css
   fs.writeFileSync(jsReleaseMinPath, jsOutput.code, encoding)
   fs.writeFileSync(cssReleaseMinPath, cssOutput.css, encoding)
+  // sync to dist
+  if (!fs.existsSync('dist')) fs.mkdirSync('dist', { recursive: true })
+  syncImgDirs('dist')
+  Array(jsReleasePath, jsReleaseMinPath, cssReleasePath, cssReleaseMinPath).forEach(file => {
+    fs.writeFileSync(path.join('dist', path.basename(file)), fs.readFileSync(file, encoding), encoding)
+  })
   // sync to website
   fs.writeFileSync(path.join('docs', 'js', 'jquery.min.js'), latestJQueryMinJS, encoding)
   fs.writeFileSync(path.join('docs', 'css', 'normalize.min.css'), csso.minify(latestNormalizeCSS).css, encoding)

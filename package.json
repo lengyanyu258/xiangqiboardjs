@@ -1,14 +1,17 @@
 {
-  "name": "xiangqiboard",
-  "author": "@lengyanyu258 <lengyanyu258@outlook.com>",
+  "name": "@lengyanyu258/xiangqiboardjs",
+  "author": "@lengyanyu258 <lengyanyu258@outlook.com> (github.com/lengyanyu258)",
   "description": "JavaScript xiangqiboard widget",
+  "homepage": "https://lengyanyu258.github.io/xiangqiboardjs/index.html",
   "license": "MIT",
-  "version": "0.3.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/lengyanyu258/xiangqiboardjs.git"
+  "version": "0.3.2",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
-  "main": "src/xiangqiboard.js",
+  "repository": "git://github.com/lengyanyu258/xiangqiboardjs.git",
+  "files": [
+    "dist/"
+  ],
   "dependencies": {
     "jquery": "^3.4.1"
   },
