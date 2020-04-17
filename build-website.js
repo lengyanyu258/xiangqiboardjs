@@ -96,7 +96,7 @@ function renderCSS (css) {
 }
 
 function writeSrcFiles () {
-  const releasePath = path.join('docs', 'releases', 'xiangqiboardjs-' + VERSION)
+  const releasePath = path.join('releases', 'xiangqiboardjs-' + VERSION)
   const jsReleasePath = path.join(releasePath, 'js', 'xiangqiboard-' + VERSION + '.js')
   const jsReleaseMinPath = jsReleasePath.replace(/js$/, 'min.js')
   const cssReleasePath = path.join(releasePath, 'css', 'xiangqiboard-' + VERSION + '.css')
