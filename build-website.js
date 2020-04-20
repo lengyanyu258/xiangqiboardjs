@@ -24,6 +24,7 @@ const docsJSON = JSON.parse(fs.readFileSync(path.join('templates', 'docs.json'),
 // files
 const latestChessboardJS = fs.readFileSync(path.join('src', 'xiangqiboard.js'), encoding)
 const latestChessboardCSS = fs.readFileSync(path.join('src', 'xiangqiboard.css'), encoding)
+const latestPrettifyJS = fs.readFileSync(path.join('node_modules', 'code-prettify', 'src', 'prettify.js'), encoding)
 const latestJQueryMinJS = fs.readFileSync(path.join('node_modules', 'jquery', 'dist', 'jquery.min.js'), encoding)
 const latestNormalizeCSS = fs.readFileSync(path.join('node_modules', 'normalize.css', 'normalize.css'), encoding)
 
@@ -142,6 +143,7 @@ function writeSrcFiles () {
     fs.writeFileSync(path.join('dist', path.basename(file)), fs.readFileSync(file, encoding), encoding)
   })
   // sync to website
+  fs.writeFileSync(path.join('docs', 'js', 'prettify.min.js'), Terser.minify(latestPrettifyJS).code, encoding)
   fs.writeFileSync(path.join('docs', 'js', 'jquery.min.js'), latestJQueryMinJS, encoding)
   fs.writeFileSync(path.join('docs', 'css', 'normalize.min.css'), csso.minify(latestNormalizeCSS).css, encoding)
   fs.writeFileSync(path.join('docs', 'js', 'xiangqiboard.min.js'), fs.readFileSync(jsReleaseMinPath, encoding), encoding)
