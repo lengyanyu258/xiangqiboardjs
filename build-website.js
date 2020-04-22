@@ -28,7 +28,7 @@ const latestPrettifyJS = fs.readFileSync(path.join('node_modules', 'code-prettif
 const latestJQueryMinJS = fs.readFileSync(path.join('node_modules', 'jquery', 'dist', 'jquery.min.js'), encoding)
 const latestNormalizeCSS = fs.readFileSync(path.join('node_modules', 'normalize.css', 'normalize.css'), encoding)
 
-const changelog = fs.readFileSync('CHANGELOG.md', encoding)
+const packageJSON = JSON.parse(fs.readFileSync('package.json', encoding))
 const packageFiles = ['CHANGELOG.md', 'LICENSE.md', 'package.json', 'README.md']
 const packageImgDirs = [path.join('xiangqiboards', 'wikimedia'),
   path.join('xiangqipieces', 'graphic'), path.join('xiangqipieces', 'traditional'),
@@ -76,10 +76,8 @@ const board2 = Xiangqiboard('board2', {
 $('#startBtn').on('click', board2.start)
 $('#clearBtn').on('click', board2.clear)`.trim()
 
-// [x.y.z] => x.y.z
-const VERSION = changelog.match(/(?<=\[)[\d.]+?(?=])/)[0]
-// [x.y.z] - yyyy-MM-dd => yyyy-MM-dd
-const DATE = changelog.match(/(?<=[\[\d.\] -]+?)\d{4}-\d{2}-\d{2}/)[0]
+const VERSION = packageJSON.version
+const DATE = (new Date()).toLocaleDateString()
 
 function renderJS (js) {
   return (js + '')
@@ -114,16 +112,8 @@ function writeSrcFiles () {
   const cssReleasePath = path.join(releasePath, 'css', 'xiangqiboard-' + VERSION + '.css')
   const cssReleaseMinPath = cssReleasePath.replace(/css$/, 'min.css')
 
-  const jsOptions = {
-    output: {
-      comments: 'some'
-    },
-    toplevel: true
-  }
   const jsInput = renderJS(latestChessboardJS)
-  const jsOutput = Terser.minify(jsInput, jsOptions)
   const cssInput = renderCSS(latestChessboardCSS)
-  const cssOutput = csso.minify(cssInput)
 
   // sync to release
   if (!fs.existsSync(path.join(releasePath, 'js'))) fs.mkdirSync(path.join(releasePath, 'js'), { recursive: true })
@@ -134,8 +124,8 @@ function writeSrcFiles () {
   fs.writeFileSync(jsReleasePath, jsInput, encoding)
   fs.writeFileSync(cssReleasePath, cssInput, encoding)
   // .min.js, .min.css
-  fs.writeFileSync(jsReleaseMinPath, jsOutput.code, encoding)
-  fs.writeFileSync(cssReleaseMinPath, cssOutput.css, encoding)
+  fs.writeFileSync(jsReleaseMinPath, Terser.minify(jsInput).code, encoding)
+  fs.writeFileSync(cssReleaseMinPath, csso.minify(cssInput).css, encoding)
   // sync to dist
   if (!fs.existsSync('dist')) fs.mkdirSync('dist', { recursive: true })
   syncImgDirs('dist')
