@@ -26,6 +26,8 @@
     "terser": "^4.6.10"
   },
   "scripts": {
-    "build": "node build-website.js"
+    "publish": "npm run build && npm run website",
+    "build": "node scripts/build.js",
+    "website": "node scripts/website.js"
   }
 }

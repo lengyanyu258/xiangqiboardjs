@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// This files builds the .html files in the docs/ folder
+// This file builds the website files in the docs/ folder
 // -----------------------------------------------------------------------------
 
 // libraries
@@ -21,18 +21,10 @@ const examplesTemplate = fs.readFileSync(path.join('templates', 'examples.mustac
 const docsTemplate = fs.readFileSync(path.join('templates', 'docs.mustache'), encoding)
 const docsJSON = JSON.parse(fs.readFileSync(path.join('templates', 'docs.json'), encoding))
 
-// files
-const latestChessboardJS = fs.readFileSync(path.join('src', 'xiangqiboard.js'), encoding)
-const latestChessboardCSS = fs.readFileSync(path.join('src', 'xiangqiboard.css'), encoding)
+// dependent files
 const latestPrettifyJS = fs.readFileSync(path.join('node_modules', 'code-prettify', 'src', 'prettify.js'), encoding)
 const latestJQueryMinJS = fs.readFileSync(path.join('node_modules', 'jquery', 'dist', 'jquery.min.js'), encoding)
 const latestNormalizeCSS = fs.readFileSync(path.join('node_modules', 'normalize.css', 'normalize.css'), encoding)
-
-const packageJSON = JSON.parse(fs.readFileSync('package.json', encoding))
-const packageFiles = ['CHANGELOG.md', 'LICENSE.md', 'package.json', 'README.md']
-const packageImgDirs = [path.join('xiangqiboards', 'wikimedia'),
-  path.join('xiangqipieces', 'graphic'), path.join('xiangqipieces', 'traditional'),
-  path.join('xiangqipieces', 'wikimedia'), path.join('xiangqipieces', 'wikipedia')]
 
 // grab the examples
 const examplesArr = kidif('examples/*.example')
@@ -75,70 +67,6 @@ const board2 = Xiangqiboard('board2', {
 
 $('#startBtn').on('click', board2.start)
 $('#clearBtn').on('click', board2.clear)`.trim()
-
-const VERSION = packageJSON.version
-const DATE = (new Date()).toLocaleDateString()
-
-function renderJS (js) {
-  return (js + '')
-    .replace(/@VERSION/g, VERSION)
-    // remove RUN_ASSERTS
-    .replace(/\s*console.assert.+/g, '')
-    .replace(/\s*if\W+RUN_ASSERTS[^}]+}/g, '') // if (RUN_ASSERTS) {}
-    .replace(/\s*\w*\W*RUN_ASSERTS.+/g, '') // const RUN_ASSERTS = true
-}
-
-function renderCSS (css) {
-  return (css + '')
-    .replace(/\$version\$/g, VERSION)
-    .replace(/\$date\$/g, DATE)
-}
-
-function syncImgDirs (targetTopPath) {
-  packageImgDirs.forEach(dir => {
-    const fromDirPath = path.join('docs', 'img', dir)
-    const toDirPath = path.join(targetTopPath, 'img', dir)
-    if (!fs.existsSync(toDirPath)) fs.mkdirSync(toDirPath, { recursive: true })
-    fs.readdirSync(fromDirPath).forEach(file => {
-      fs.writeFileSync(path.join(toDirPath, file), fs.readFileSync(path.join(fromDirPath, file), encoding), encoding)
-    })
-  })
-}
-
-function writeSrcFiles () {
-  const releasePath = path.join('releases', 'xiangqiboardjs-' + VERSION)
-  const jsReleasePath = path.join(releasePath, 'js', 'xiangqiboard-' + VERSION + '.js')
-  const jsReleaseMinPath = jsReleasePath.replace(/js$/, 'min.js')
-  const cssReleasePath = path.join(releasePath, 'css', 'xiangqiboard-' + VERSION + '.css')
-  const cssReleaseMinPath = cssReleasePath.replace(/css$/, 'min.css')
-
-  const jsInput = renderJS(latestChessboardJS)
-  const cssInput = renderCSS(latestChessboardCSS)
-
-  // sync to release
-  if (!fs.existsSync(path.join(releasePath, 'js'))) fs.mkdirSync(path.join(releasePath, 'js'), { recursive: true })
-  if (!fs.existsSync(path.join(releasePath, 'css'))) fs.mkdirSync(path.join(releasePath, 'css'), { recursive: true })
-  syncImgDirs(releasePath)
-  packageFiles.forEach(file => {fs.writeFileSync(path.join(releasePath, file), fs.readFileSync(file, encoding), encoding)})
-  // .js, .css
-  fs.writeFileSync(jsReleasePath, jsInput, encoding)
-  fs.writeFileSync(cssReleasePath, cssInput, encoding)
-  // .min.js, .min.css
-  fs.writeFileSync(jsReleaseMinPath, Terser.minify(jsInput).code, encoding)
-  fs.writeFileSync(cssReleaseMinPath, csso.minify(cssInput).css, encoding)
-  // sync to dist
-  if (!fs.existsSync('dist')) fs.mkdirSync('dist', { recursive: true })
-  syncImgDirs('dist')
-  Array(jsReleasePath, jsReleaseMinPath, cssReleasePath, cssReleaseMinPath).forEach(file => {
-    fs.writeFileSync(path.join('dist', path.basename(file)), fs.readFileSync(file, encoding), encoding)
-  })
-  // sync to website
-  fs.writeFileSync(path.join('docs', 'js', 'prettify.min.js'), Terser.minify(latestPrettifyJS).code, encoding)
-  fs.writeFileSync(path.join('docs', 'js', 'jquery.min.js'), latestJQueryMinJS, encoding)
-  fs.writeFileSync(path.join('docs', 'css', 'normalize.min.css'), csso.minify(latestNormalizeCSS).css, encoding)
-  fs.writeFileSync(path.join('docs', 'js', 'xiangqiboard.min.js'), fs.readFileSync(jsReleaseMinPath, encoding), encoding)
-  fs.writeFileSync(path.join('docs', 'css', 'xiangqiboard.min.css'), fs.readFileSync(cssReleaseMinPath, encoding), encoding)
-}
 
 function writeHomepage () {
   const headHTML = mustache.render(headTemplate, { pageTitle: 'Homepage' })
@@ -198,13 +126,19 @@ function writeDocsPage () {
 }
 
 function writeWebsite () {
-  writeSrcFiles()
   writeHomepage()
   writeExamplesPage()
   writeDocsPage()
 }
 
+function updateWebsite () {
+  fs.writeFileSync(path.join('docs', 'js', 'prettify.min.js'), Terser.minify(latestPrettifyJS).code, encoding)
+  fs.writeFileSync(path.join('docs', 'js', 'jquery.min.js'), latestJQueryMinJS, encoding)
+  fs.writeFileSync(path.join('docs', 'css', 'normalize.min.css'), csso.minify(latestNormalizeCSS).css, encoding)
+}
+
 writeWebsite()
+updateWebsite()
 
 // -----------------------------------------------------------------------------
 // HTML
@@ -410,6 +344,7 @@ function buildExamplesCellHTML (examplesIds) {
 }
 
 function buildMostRecentVersionHTML () {
+  const VERSION = JSON.parse(fs.readFileSync('package.json', encoding)).version
   return '<a href="https://github.com/lengyanyu258/xiangqiboardjs/releases/download/v'
     + VERSION + '/xiangqiboardjs-' + VERSION + '.zip">Download v' + VERSION + '</a>'
 }
