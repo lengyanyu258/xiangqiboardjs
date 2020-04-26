@@ -72,8 +72,9 @@ CHESSBOARD_EXAMPLES["1002"] = {
   description: "Pass a <a href=\"docs.html#fen_string\">FEN String</a> as the second argument to\ninitialize the board to a specific position.",
   html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
   name: "FEN String",
-  jsStr: "// B31(Encyclopedia of Chinese Chess Openings, ECCO), 中炮对反宫马\nconst B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\nconst board = Xiangqiboard('myBoard', B31);",
+  jsStr: "// ref: http://www.xqbase.com/ecco/ecco_intro.htm\n// B31(Encyclopedia of Chinese Chess Openings, ECCO), 中炮对反宫马\nconst B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';\nconst board = Xiangqiboard('myBoard', B31);",
   jsFn: function () {
+// ref: http://www.xqbase.com/ecco/ecco_intro.htm
 // B31(Encyclopedia of Chinese Chess Openings, ECCO), 中炮对反宫马
 const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
 const board = Xiangqiboard('myBoard', B31);
@@ -171,10 +172,10 @@ CHESSBOARD_EXAMPLES["2004"] = {
   description: "Use the <a href=\"docs.html#config:pieceTheme\"><code class=\"js plain\">pieceTheme</code></a> property to set the source of piece images.",
   html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
   name: "Piece Theme String",
-  jsStr: "const config = {\n  pieceTheme: 'img/xiangqipieces/wikipedia/{piece}.svg',\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsStr: "const config = {\n  pieceTheme: 'img/xiangqipieces/graphic/{piece}.svg',\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
   jsFn: function () {
 const config = {
-  pieceTheme: 'img/xiangqipieces/wikipedia/{piece}.svg',
+  pieceTheme: 'img/xiangqipieces/graphic/{piece}.svg',
   position: 'start'
 };
 const board = Xiangqiboard('myBoard', config);
@@ -224,12 +225,12 @@ CHESSBOARD_EXAMPLES["2030"] = {
   description: "<a href=\"docs.html#config:pieceTheme\"><code class=\"js plain\">pieceTheme</code></a> can be a function.",
   html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
   name: "Piece Theme Function",
-  jsStr: "function pieceTheme (piece) {\n  // graphic theme for red pieces\n  if (piece.search(/r/) !== -1) {\n    return 'img/xiangqipieces/graphic/' + piece + '.svg';\n  }\n\n  // traditional theme for black pieces\n  return 'img/xiangqipieces/traditional/' + piece + '.svg';\n}\n\nconst config = {\n  pieceTheme: pieceTheme,\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsStr: "function pieceTheme (piece) {\n  // graphic theme for red pieces\n  if (piece.search(/r/) !== -1) {\n    return 'img/xiangqipieces/wikipedia/' + piece + '.svg';\n  }\n\n  // traditional theme for black pieces\n  return 'img/xiangqipieces/traditional/' + piece + '.svg';\n}\n\nconst config = {\n  pieceTheme: pieceTheme,\n  position: 'start'\n};\nconst board = Xiangqiboard('myBoard', config);",
   jsFn: function () {
 function pieceTheme (piece) {
   // graphic theme for red pieces
   if (piece.search(/r/) !== -1) {
-    return 'img/xiangqipieces/graphic/' + piece + '.svg';
+    return 'img/xiangqipieces/wikipedia/' + piece + '.svg';
   }
 
   // traditional theme for black pieces
@@ -258,12 +259,13 @@ const board = Xiangqiboard('myBoard', config);
 };
 
 CHESSBOARD_EXAMPLES["2063"] = {
-  description: "You can set the <a href=\"docs.html#config:position\"><code class=\"js plain\">position</code></a> property with a <a href=\"docs.html#position_object\">Position Object</a>.",
+  description: "You can set the <a href=\"docs.html#config:position\"><code class=\"js plain\">position</code></a> property with a <a href=\"docs.html#position_object\">Position Object</a>.\n<p>in order to interpret the position keys,\n we use the <a href=\"docs.html#config:showNotation\"><code class=\"js plain\">showNotation</code></a> property\n to turn board notation on, which can be found on Config -> Notation.</p>",
   html: "<div id=\"myBoard\" style=\"width: 450px\"></div>",
   name: "Position Object",
-  jsStr: "const config = {\n  position: {\n    e8: 'rP',\n    f9: 'bK',\n    d1: 'rK'\n  }\n};\nconst board = Xiangqiboard('myBoard', config);",
+  jsStr: "const config = {\n  showNotation: true,\n  position: {\n    e8: 'rP',\n    f9: 'bK',\n    d1: 'rK'\n  }\n};\nconst board = Xiangqiboard('myBoard', config);",
   jsFn: function () {
 const config = {
+  showNotation: true,
   position: {
     e8: 'rP',
     f9: 'bK',

@@ -14,7 +14,7 @@ Piece Theme Function
 function pieceTheme (piece) {
   // graphic theme for red pieces
   if (piece.search(/r/) !== -1) {
-    return 'img/xiangqipieces/graphic/' + piece + '.svg';
+    return 'img/xiangqipieces/wikipedia/' + piece + '.svg';
   }
 
   // traditional theme for black pieces

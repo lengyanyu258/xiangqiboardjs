@@ -12,7 +12,7 @@ Use the <a href="docs.html#config:pieceTheme"><code class="js plain">pieceTheme<
 
 ===== JS
 const config = {
-  pieceTheme: 'img/xiangqipieces/wikipedia/{piece}.svg',
+  pieceTheme: 'img/xiangqipieces/graphic/{piece}.svg',
   position: 'start'
 };
 const board = Xiangqiboard('myBoard', config);
