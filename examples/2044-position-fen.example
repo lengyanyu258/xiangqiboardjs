@@ -12,6 +12,7 @@ You can set the <a href="docs.html#config:position"><code class="js plain">posit
 
 ===== JS
 const config = {
+  showNotation: true,
   position: 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1'
 };
 const board = Xiangqiboard('myBoard', config);
