@@ -24,16 +24,15 @@
     $('#exampleLink-' + exampleId).addClass('active')
   }
 
-  function buildExampleBodyHTML (example) {
+  function buildExampleBodyHTML (example, id) {
     return '<h2>' + htmlEscape(example.name) + '</h2>' +
-      // TODO: need to add single example link here
-      // '<p><a href=""></a></p>' +
       '<p>' + example.description + '</p>' +
       '<div class="container-4e1ee">' + example.html + '</div>' +
       '<h4>JavaScript</h4>' +
       '<pre class="prettyprint">' + htmlEscape(example.jsStr) + '</pre>' +
       '<h4>HTML</h4>' +
-      '<pre class="prettyprint">' + htmlEscape(example.html) + '</pre>'
+      '<pre class="prettyprint">' + htmlEscape(example.html) + '</pre>' +
+      '<p><a class="small-link-335ea" href="examples/' + id + '.html" target="_blank">View this example in new window.</a></p>'
   }
 
   function showExample (exampleId) {
@@ -43,7 +42,7 @@
     highlightGroupHeader(groupIdx)
     highlightExampleLink(exampleId)
 
-    $('#exampleBodyContainer').html(buildExampleBodyHTML(EXAMPLES[exampleId]))
+    $('#exampleBodyContainer').html(buildExampleBodyHTML(EXAMPLES[exampleId], exampleId))
     EXAMPLES[exampleId].jsFn()
 
     prettyPrint()

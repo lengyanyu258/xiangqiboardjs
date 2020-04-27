@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>xiangqiboardjs &raquo; Example #{{{id}}} - {{{name}}}</title>
+    <base href="../"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/xiangqiboard.min.css"/>
+    {{#css}}
+        <style type="text/css">
+                {{{css}}}
+        </style>
+    {{/css}}
+</head>
+<body>
+<p><a href="examples.html#{{{id}}}">&larr; Back to all examples.</a></p>
+
+<p>{{{description}}}</p>
+
+<!--- Begin Example HTML ------------------------------------------------------>
+{{{html}}}
+<!--- End Example HTML -------------------------------------------------------->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/xiangqiboard.min.js"></script>
+{{#includeXiangqiJS}}
+    <script src="js/xiangqi-0.3.1-dev.min.js"></script>
+{{/includeXiangqiJS}}
+<script>
+    // --- Begin Example JS --------------------------------------------------------
+        {{{js}}}
+    // --- End Example JS ----------------------------------------------------------
+</script>
+</body>
+</html>

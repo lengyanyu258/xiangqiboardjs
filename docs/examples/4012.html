@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>xiangqiboardjs &raquo; Example #4012 - onMoveEnd</title>
+    <base href="../"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/xiangqiboard.min.css"/>
+</head>
+<body>
+<p><a href="examples.html#4012">&larr; Back to all examples.</a></p>
+
+<p>The <a href="docs.html#config:onMoveEnd"><code class="js plain">onMoveEnd</code></a> event fires at the end of animations when the board position changes.</p>
+
+<!--- Begin Example HTML ------------------------------------------------------>
+<div id="myBoard" style="width: 450px"></div>
+<button id="startBtn">Start Position</button>
+<button id="clearBtn">Clear Board</button>
+<button id="B31Btn">B31</button>
+<button id="moveBtn">c3-c4, g6-g5</button>
+<!--- End Example HTML -------------------------------------------------------->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/xiangqiboard.min.js"></script>
+<script>
+    // --- Begin Example JS --------------------------------------------------------
+        function onMoveEnd (oldPos, newPos) {
+  console.log('Move animation complete:');
+  console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
+  console.log('New position: ' + Xiangqiboard.objToFen(newPos));
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  position: 'start',
+  onMoveEnd: onMoveEnd
+};
+const board = Xiangqiboard('myBoard', config);
+
+$('#B31Btn').on('click', function () {
+  board.position('r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1');
+});
+$('#moveBtn').on('click', function () {
+  board.move('c3-c4', 'g6-g5');
+});
+$('#startBtn').on('click', board.start);
+$('#clearBtn').on('click', board.clear);
+    // --- End Example JS ----------------------------------------------------------
+</script>
+</body>
+</html>

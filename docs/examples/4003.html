@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>xiangqiboardjs &raquo; Example #4003 - onDragMove</title>
+    <base href="../"/>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/xiangqiboard.min.css"/>
+</head>
+<body>
+<p><a href="examples.html#4003">&larr; Back to all examples.</a></p>
+
+<p>The <a href="docs.html#config:onDragMove"><code class="js plain">onDragMove</code></a> event fires every time a piece changes location.</p>
+
+<!--- Begin Example HTML ------------------------------------------------------>
+<div id="myBoard" style="width: 450px"></div>
+<!--- End Example HTML -------------------------------------------------------->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/xiangqiboard.min.js"></script>
+<script>
+    // --- Begin Example JS --------------------------------------------------------
+        function onDragMove (newLocation, oldLocation, source,
+                     piece, position, orientation) {
+  console.log('New location: ' + newLocation);
+  console.log('Old location: ' + oldLocation);
+  console.log('Source: ' + source);
+  console.log('Piece: ' + piece);
+  console.log('Position: ' + Xiangqiboard.objToFen(position));
+  console.log('Orientation: ' + orientation);
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+}
+
+const config = {
+  draggable: true,
+  position: 'start',
+  onDragMove: onDragMove,
+  sparePieces: true
+};
+const board = Xiangqiboard('myBoard', config);
+    // --- End Example JS ----------------------------------------------------------
+</script>
+</body>
+</html>

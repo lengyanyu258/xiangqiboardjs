@@ -18,6 +18,7 @@ const headerTemplate = fs.readFileSync(path.join('templates', '_header.mustache'
 const footerTemplate = fs.readFileSync(path.join('templates', '_footer.mustache'), encoding)
 const homepageTemplate = fs.readFileSync(path.join('templates', 'homepage.mustache'), encoding)
 const examplesTemplate = fs.readFileSync(path.join('templates', 'examples.mustache'), encoding)
+const singleExampleTemplate = fs.readFileSync(path.join('templates', 'single-example.mustache'), encoding)
 const docsTemplate = fs.readFileSync(path.join('templates', 'docs.mustache'), encoding)
 const docsJSON = JSON.parse(fs.readFileSync(path.join('templates', 'docs.json'), encoding))
 
@@ -28,7 +29,7 @@ const latestNormalizeCSS = fs.readFileSync(path.join('node_modules', 'normalize.
 
 // grab the examples
 const examplesArr = kidif('examples/*.example')
-const examplesObj = examplesArr.reduce(function (examplesObj, example) {
+const examplesObj = examplesArr.reduce((examplesObj, example) => {
   examplesObj[example.id] = example
   return examplesObj
 }, {})
@@ -95,6 +96,22 @@ function writeExamplesPage () {
   fs.writeFileSync(path.join('docs', 'examples.html'), html, encoding)
 }
 
+function isIntegrationExample (example) {
+  return (example.id + '').startsWith('5')
+}
+
+function writeSingleExamplePage (example) {
+  if (isIntegrationExample(example)) {
+    example.includeXiangqiJS = true
+  }
+  const html = mustache.render(singleExampleTemplate, example)
+  fs.writeFileSync(path.join('docs', 'examples', example.id + '.html'), html, encoding)
+}
+
+function writeSingleExamplesPages () {
+  examplesArr.forEach(writeSingleExamplePage)
+}
+
 const configTableRowsHTML = docsJSON.config.reduce(function (html, itm) {
   if (isString(itm)) return html
   return html + buildConfigDocsTableRowHTML('config', itm)
@@ -128,6 +145,7 @@ function writeDocsPage () {
 function writeWebsite () {
   writeHomepage()
   writeExamplesPage()
+  writeSingleExamplesPages()
   writeDocsPage()
 }
 
