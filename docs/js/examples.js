@@ -31,7 +31,8 @@
       html += '<style type="text/css">' + example.css + '</style>'
     }
     html += example.html + '</div>'
-    return '<h2>' + htmlEscape(example.name) + '</h2>' +
+    return '<h2 class="hover-linkable">' +
+      '<a class="hover-link" href="#' + id + '"></a>' + htmlEscape(example.name) + '</h2>' +
       '<p>' + example.description + '</p>' +
       html +
       CSS +
