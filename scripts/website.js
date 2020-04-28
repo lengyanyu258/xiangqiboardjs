@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// This file builds the website files in the docs/ folder
+// This file builds the website contents in the docs/ folder
 // -----------------------------------------------------------------------------
 
 // libraries
