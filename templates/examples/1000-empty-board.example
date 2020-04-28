@@ -5,7 +5,7 @@
 Empty Board
 
 ===== Description
-Xiangqiboard.js initializes to an empty board with no second argument.
+xiangqiboard.js initializes to an empty board with no second argument.
 
 ===== HTML
 <div id="myBoard" style="width: 450px"></div>
