@@ -164,9 +164,9 @@ updateWebsite()
 
 function buildExamplesJS () {
   let txt = 'window.CHESSBOARD_EXAMPLES = {}\n\n'
-  let css = ''
 
   examplesArr.forEach(function (ex) {
+    let css = ''
     if (ex.css) {
       css = '  css: ' + JSON.stringify(ex.css) + ',\n'
     }
