@@ -34,11 +34,11 @@
     return '<h2>' + htmlEscape(example.name) + '</h2>' +
       '<p>' + example.description + '</p>' +
       html +
-      '<h4>JavaScript</h4>' +
-      '<pre class="prettyprint">' + htmlEscape(example.jsStr) + '</pre>' +
       CSS +
       '<h4>HTML</h4>' +
       '<pre class="prettyprint">' + htmlEscape(example.html) + '</pre>' +
+      '<h4>JavaScript</h4>' +
+      '<pre class="prettyprint">' + htmlEscape(example.jsStr) + '</pre>' +
       '<p><a class="small-link-335ea" href="examples/' + id + '.html" target="_blank">View this example in new window.</a></p>'
   }
 
