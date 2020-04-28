@@ -28,7 +28,7 @@ const latestJQueryMinJS = fs.readFileSync(path.join('node_modules', 'jquery', 'd
 const latestNormalizeCSS = fs.readFileSync(path.join('node_modules', 'normalize.css', 'normalize.css'), encoding)
 
 // grab the examples
-const examplesArr = kidif('examples/*.example')
+const examplesArr = kidif(path.join('templates', 'examples', '*.example'))
 const examplesObj = examplesArr.reduce((examplesObj, example) => {
   examplesObj[example.id] = example
   return examplesObj
