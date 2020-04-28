@@ -25,11 +25,18 @@
   }
 
   function buildExampleBodyHTML (example, id) {
+    let CSS = '', html = '<div class="container-4e1ee">'
+    if (example.css) {
+      CSS = '<h4>CSS</h4>' + '<pre class="prettyprint">' + htmlEscape(example.css) + '</pre>'
+      html += '<style type="text/css">' + example.css + '</style>'
+    }
+    html += example.html + '</div>'
     return '<h2>' + htmlEscape(example.name) + '</h2>' +
       '<p>' + example.description + '</p>' +
-      '<div class="container-4e1ee">' + example.html + '</div>' +
+      html +
       '<h4>JavaScript</h4>' +
       '<pre class="prettyprint">' + htmlEscape(example.jsStr) + '</pre>' +
+      CSS +
       '<h4>HTML</h4>' +
       '<pre class="prettyprint">' + htmlEscape(example.html) + '</pre>' +
       '<p><a class="small-link-335ea" href="examples/' + id + '.html" target="_blank">View this example in new window.</a></p>'

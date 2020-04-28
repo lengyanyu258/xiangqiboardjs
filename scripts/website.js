@@ -164,10 +164,15 @@ updateWebsite()
 
 function buildExamplesJS () {
   let txt = 'window.CHESSBOARD_EXAMPLES = {}\n\n'
+  let css = ''
 
   examplesArr.forEach(function (ex) {
+    if (ex.css) {
+      css = '  css: ' + JSON.stringify(ex.css) + ',\n'
+    }
     txt += 'CHESSBOARD_EXAMPLES["' + ex.id + '"] = {\n' +
       '  description: ' + JSON.stringify(ex.description) + ',\n' +
+      css +
       '  html: ' + JSON.stringify(ex.html) + ',\n' +
       '  name: ' + JSON.stringify(ex.name) + ',\n' +
       '  jsStr: ' + JSON.stringify(ex.js) + ',\n' +

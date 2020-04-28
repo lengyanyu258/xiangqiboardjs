@@ -7,12 +7,12 @@ Highlight Legal Moves
 ===== Description
 Use the <code class="js plain"><a href="docs.html#config:onMouseoverSquare">onMouseoverSquare</a></code> and <code class="js plain"><a href="docs.html#config:onMouseoutSquare">onMouseoutSquare</a></code> events to highlight legal squares.
 
-===== HTML
-<style type="text/css">
+===== CSS
 .highlight {
   box-shadow: inset 0 0 3px 3px white;
 }
-</style>
+
+===== HTML
 <div id="myBoard" style="width: 450px"></div>
 
 ===== JS
