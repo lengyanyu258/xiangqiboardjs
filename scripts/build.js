@@ -42,7 +42,6 @@ function syncImgDirs (targetTopPath) {
   packageImgDirs.forEach(dir => {
     const fromDirPath = path.join('docs', 'img', dir)
     const toDirPath = path.join(targetTopPath, 'img', dir)
-    if (!fs.existsSync(toDirPath)) fs.mkdirSync(toDirPath, { recursive: true })
     fs.readdirSync(fromDirPath).forEach(file => {
       fs.writeFileSync(path.join(toDirPath, file), fs.readFileSync(path.join(fromDirPath, file), encoding), encoding)
     })
@@ -71,10 +70,10 @@ function writeSrcFiles () {
   const cssInput = renderCSS(latestChessboardCSS)
 
   // sync to release
-  if (!fs.existsSync(path.join(releasePath, 'js'))) fs.mkdirSync(path.join(releasePath, 'js'), { recursive: true })
-  if (!fs.existsSync(path.join(releasePath, 'css'))) fs.mkdirSync(path.join(releasePath, 'css'), { recursive: true })
   syncImgDirs(releasePath)
-  packageFiles.forEach(file => {fs.writeFileSync(path.join(releasePath, file), fs.readFileSync(file, encoding), encoding)})
+  packageFiles.forEach(file => {
+    fs.writeFileSync(path.join(releasePath, file), fs.readFileSync(file, encoding), encoding)
+  })
   // .js, .css
   fs.writeFileSync(jsReleasePath, jsInput, encoding)
   fs.writeFileSync(cssReleasePath, cssInput, encoding)
