@@ -1839,3 +1839,8 @@
   window['Xiangqiboard']['fenToObj'] = fenToObj
   window['Xiangqiboard']['objToFen'] = objToFen
 })() // end anonymous wrapper
+
+/* export Chessboard object if using node or any other CommonJS compatible environment */
+if (typeof exports !== 'undefined') {
+  exports.Xiangqiboard = window.Xiangqiboard
+}
