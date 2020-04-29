@@ -20,8 +20,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        function onSnapbackEnd (piece, square, position, orientation) {
+    // --- Begin Example JS ----------------------------------------------------
+        
+function onSnapbackEnd (piece, square, position, orientation) {
   console.log('Piece: ' + piece);
   console.log('Square: ' + square);
   console.log('Position: ' + Xiangqiboard.objToFen(position));
@@ -35,7 +36,7 @@ const config = {
   onSnapbackEnd: onSnapbackEnd
 };
 const board = Xiangqiboard('myBoard', config);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

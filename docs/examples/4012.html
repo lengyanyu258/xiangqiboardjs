@@ -24,8 +24,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        function onMoveEnd (oldPos, newPos) {
+    // --- Begin Example JS ----------------------------------------------------
+        
+function onMoveEnd (oldPos, newPos) {
   console.log('Move animation complete:');
   console.log('Old position: ' + Xiangqiboard.objToFen(oldPos));
   console.log('New position: ' + Xiangqiboard.objToFen(newPos));
@@ -46,7 +47,7 @@ $('#moveBtn').on('click', function () {
 });
 $('#startBtn').on('click', board.start);
 $('#clearBtn').on('click', board.clear);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

@@ -23,8 +23,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        const board = Xiangqiboard('myBoard', 'start');
+    // --- Begin Example JS ----------------------------------------------------
+        
+const board = Xiangqiboard('myBoard', 'start');
 
 $('#move1Btn').on('click', function () {
   board.move('c3-c4');
@@ -35,7 +36,7 @@ $('#move2Btn').on('click', function () {
 });
 
 $('#startPositionBtn').on('click', board.start);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

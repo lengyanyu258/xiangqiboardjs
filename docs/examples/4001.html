@@ -20,8 +20,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        function onDragStart (source, piece, position, orientation) {
+    // --- Begin Example JS ----------------------------------------------------
+        
+function onDragStart (source, piece, position, orientation) {
   console.log('Drag started:');
   console.log('Source: ' + source);
   console.log('Piece: ' + piece);
@@ -37,7 +38,7 @@ const config = {
   sparePieces: true
 };
 const board = Xiangqiboard('myBoard', config);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

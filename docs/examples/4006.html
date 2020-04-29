@@ -20,8 +20,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        // trash black pieces when they are dropped
+    // --- Begin Example JS ----------------------------------------------------
+        
+// trash black pieces when they are dropped
 function onDrop (source, target, piece, newPos, oldPos, orientation) {
   if (piece.search(/b/) !== -1) {
     return 'trash';
@@ -34,7 +35,7 @@ const config = {
   onDrop: onDrop
 };
 const board = Xiangqiboard('myBoard', config);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

@@ -20,8 +20,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        function pieceTheme (piece) {
+    // --- Begin Example JS ----------------------------------------------------
+        
+function pieceTheme (piece) {
   // graphic theme for red pieces
   if (piece.search(/r/) !== -1) {
     return 'img/xiangqipieces/wikipedia/' + piece + '.svg';
@@ -36,7 +37,7 @@ const config = {
   position: 'start'
 };
 const board = Xiangqiboard('myBoard', config);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

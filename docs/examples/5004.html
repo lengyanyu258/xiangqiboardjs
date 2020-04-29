@@ -7,14 +7,17 @@
     <base href="../"/>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="css/xiangqiboard.min.css"/>
+        <!--- Begin Example CSS ----------------------------------------------->
         <style type="text/css">
-                .highlight-red {
+                
+.highlight-red {
   box-shadow: inset 0 0 3px 3px yellow;
 }
 .highlight-black {
   box-shadow: inset 0 0 3px 3px blue;
 }
         </style>
+        <!--- End Example CSS ------------------------------------------------->
 </head>
 <body>
 <p><a href="examples.html#5004">&larr; Back to all examples.</a></p>
@@ -29,8 +32,9 @@
 <script src="js/xiangqiboard.min.js"></script>
     <script src="js/xiangqi-0.3.1-dev.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        // NOTE: this example uses the xiangqi.js library:
+    // --- Begin Example JS ----------------------------------------------------
+        
+// NOTE: this example uses the xiangqi.js library:
 // https://github.com/lengyanyu258/xiangqi.js
 
 let board = null;
@@ -81,7 +85,7 @@ let config = {
 board = Xiangqiboard('myBoard', config);
 
 window.setTimeout(makeRandomMove, 500);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

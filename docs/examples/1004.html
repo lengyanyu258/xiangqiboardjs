@@ -7,13 +7,16 @@
     <base href="../"/>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="css/xiangqiboard.min.css"/>
+        <!--- Begin Example CSS ----------------------------------------------->
         <style type="text/css">
-                .small-board {
+                
+.small-board {
   display: inline-block;
   margin-right: 5px;
   width: 225px;
 }
         </style>
+        <!--- End Example CSS ------------------------------------------------->
 </head>
 <body>
 <p><a href="examples.html#1004">&larr; Back to all examples.</a></p>
@@ -29,15 +32,16 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        const board1 = Xiangqiboard('board1', 'start');
+    // --- Begin Example JS ----------------------------------------------------
+        
+const board1 = Xiangqiboard('board1', 'start');
 
 const B31 = 'r1bakab1r/9/1cn2cn2/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKABR1';
 const board2 = Xiangqiboard('board2', B31);
 
 const C0 = 'r1bakab1r/9/1cn3nc1/p1p1p1p1p/9/9/P1P1P1P1P/1C2C1N2/9/RNBAKAB1R';
 const board3 = Xiangqiboard('board3', C0);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>

@@ -21,8 +21,9 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
 <script>
-    // --- Begin Example JS --------------------------------------------------------
-        // only allow pieces to be dragged when the board is oriented
+    // --- Begin Example JS ----------------------------------------------------
+        
+// only allow pieces to be dragged when the board is oriented
 // in their direction
 function onDragStart (source, piece, position, orientation) {
   if ((orientation === 'red' && piece.search(/^r/) === -1) ||
@@ -39,7 +40,7 @@ const config = {
 const board = Xiangqiboard('myBoard', config);
 
 $('#flipOrientationBtn').on('click', board.flip);
-    // --- End Example JS ----------------------------------------------------------
+    // --- End Example JS ------------------------------------------------------
 </script>
 </body>
 </html>
