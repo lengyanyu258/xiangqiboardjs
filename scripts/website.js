@@ -101,9 +101,9 @@ function isIntegrationExample (example) {
 }
 
 function writeSingleExamplePage (example) {
-  if (isIntegrationExample(example)) {
-    example.includeXiangqiJS = true
-  }
+  if (isIntegrationExample(example)) example.includeXiangqiJS = true
+  if (example.css) example.css = '\n' + example.css
+  if (example.js) example.js = '\n' + example.js
   const html = mustache.render(singleExampleTemplate, example)
   fs.writeFileSync(path.join('docs', 'examples', example.id + '.html'), html, encoding)
 }
