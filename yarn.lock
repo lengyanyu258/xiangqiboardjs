@@ -843,10 +843,10 @@ isexe@^2.0.0:
   resolved "https://registry.npm.taobao.org/isexe/download/isexe-2.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fisexe%2Fdownload%2Fisexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
-jquery@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
-  integrity sha1-cU8fjZ3eS9+lV2S6N+8hRjDYDvI=
+jquery@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha1-mYC5fZ5BlGEcNlMOfcRqWNc0D8k=
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -1548,10 +1548,10 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-terser@^4.6.10:
-  version "4.6.10"
-  resolved "https://registry.npm.taobao.org/terser/download/terser-4.6.10.tgz?cache=0&sync_timestamp=1585665934022&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fterser%2Fdownload%2Fterser-4.6.10.tgz#90f5bd069ff456ddbc9503b18e52f9c493d3b7c2"
-  integrity sha1-kPW9Bp/0Vt28lQOxjlL5xJPTt8I=
+terser@4.6.12:
+  version "4.6.12"
+  resolved "https://registry.npm.taobao.org/terser/download/terser-4.6.12.tgz?cache=0&sync_timestamp=1587740090493&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fterser%2Fdownload%2Fterser-4.6.12.tgz#44b98aef8703fdb09a3491bf79b43faffc5b4fee"
+  integrity sha1-RLmK74cD/bCaNJG/ebQ/r/xbT+4=
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"

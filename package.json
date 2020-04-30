@@ -13,7 +13,7 @@
     "dist/"
   ],
   "dependencies": {
-    "jquery": "^3.4.1"
+    "jquery": "3.5.0"
   },
   "devDependencies": {
     "code-prettify": "^0.1.0",
@@ -23,7 +23,7 @@
     "mustache": "^4.0.1",
     "normalize.css": "^8.0.1",
     "standard": "^14.3.3",
-    "terser": "^4.6.10"
+    "terser": "4.6.12"
   },
   "scripts": {
     "build": "node scripts/build.js",
