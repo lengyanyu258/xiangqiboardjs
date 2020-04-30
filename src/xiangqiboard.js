@@ -12,7 +12,7 @@
 ;(function () {
   'use strict'
 
-  const $ = window['jQuery']
+  const $ = window.jQuery
 
   // ---------------------------------------------------------------------------
   // Constants
@@ -146,12 +146,12 @@
   }
 
   if (RUN_ASSERTS) {
-    console.assert(interpolateTemplate('abc', {a: 'x'}) === 'abc')
+    console.assert(interpolateTemplate('abc', { a: 'x' }) === 'abc')
     console.assert(interpolateTemplate('{a}bc', {}) === '{a}bc')
-    console.assert(interpolateTemplate('{a}bc', {p: 'q'}) === '{a}bc')
-    console.assert(interpolateTemplate('{a}bc', {a: 'x'}) === 'xbc')
-    console.assert(interpolateTemplate('{a}bc{a}bc', {a: 'x'}) === 'xbcxbc')
-    console.assert(interpolateTemplate('{a}{a}{b}', {a: 'x', b: 'y'}) === 'xxy')
+    console.assert(interpolateTemplate('{a}bc', { p: 'q' }) === '{a}bc')
+    console.assert(interpolateTemplate('{a}bc', { a: 'x' }) === 'xbc')
+    console.assert(interpolateTemplate('{a}bc{a}bc', { a: 'x' }) === 'xbcxbc')
+    console.assert(interpolateTemplate('{a}{a}{b}', { a: 'x', b: 'y' }) === 'xxy')
   }
 
   // ---------------------------------------------------------------------------
@@ -287,10 +287,10 @@
   if (RUN_ASSERTS) {
     console.assert(validPositionObject(START_POSITION))
     console.assert(validPositionObject({}))
-    console.assert(validPositionObject({e2: 'rP'}))
-    console.assert(validPositionObject({e2: 'rP', d2: 'rP'}))
-    console.assert(!validPositionObject({e2: 'BP'}))
-    console.assert(!validPositionObject({y2: 'rP'}))
+    console.assert(validPositionObject({ e2: 'rP' }))
+    console.assert(validPositionObject({ e2: 'rP', d2: 'rP' }))
+    console.assert(!validPositionObject({ e2: 'BP' }))
+    console.assert(!validPositionObject({ y2: 'rP' }))
     console.assert(!validPositionObject(null))
     console.assert(!validPositionObject('start'))
     console.assert(!validPositionObject(START_FEN))
@@ -409,29 +409,29 @@
   if (RUN_ASSERTS) {
     console.assert(objToFen(START_POSITION) === START_FEN)
     console.assert(objToFen({}) === '9/9/9/9/9/9/9/9/9/9')
-    console.assert(objToFen({a2: 'rP', 'b2': 'bP'}) === '9/9/9/9/9/9/9/Pp7/9/9')
+    console.assert(objToFen({ a2: 'rP', b2: 'bP' }) === '9/9/9/9/9/9/9/Pp7/9/9')
   }
 
   function squeezeFenEmptySquares (fen) {
     return fen.replace(/111111111/g, '9')
-              .replace(/11111111/g, '8')
-              .replace(/1111111/g, '7')
-              .replace(/111111/g, '6')
-              .replace(/11111/g, '5')
-              .replace(/1111/g, '4')
-              .replace(/111/g, '3')
-              .replace(/11/g, '2')
+      .replace(/11111111/g, '8')
+      .replace(/1111111/g, '7')
+      .replace(/111111/g, '6')
+      .replace(/11111/g, '5')
+      .replace(/1111/g, '4')
+      .replace(/111/g, '3')
+      .replace(/11/g, '2')
   }
 
   function expandFenEmptySquares (fen) {
     return fen.replace(/9/g, '111111111')
-              .replace(/8/g, '11111111')
-              .replace(/7/g, '1111111')
-              .replace(/6/g, '111111')
-              .replace(/5/g, '11111')
-              .replace(/4/g, '1111')
-              .replace(/3/g, '111')
-              .replace(/2/g, '11')
+      .replace(/8/g, '11111111')
+      .replace(/7/g, '1111111')
+      .replace(/6/g, '111111')
+      .replace(/5/g, '11111')
+      .replace(/4/g, '1111')
+      .replace(/3/g, '111')
+      .replace(/2/g, '11')
   }
 
   // returns the distance between two squares
@@ -551,11 +551,11 @@
 
   function expandConfigArgumentShorthand (config) {
     if (config === 'start') {
-      config = {position: deepCopy(START_POSITION)}
+      config = { position: deepCopy(START_POSITION) }
     } else if (validFen(config)) {
-      config = {position: fenToObj(config)}
+      config = { position: fenToObj(config) }
     } else if (validPositionObject(config)) {
-      config = {position: deepCopy(config)}
+      config = { position: deepCopy(config) }
     }
 
     // config must be an object
@@ -670,7 +670,7 @@
     if (!checkJQuery()) {
       return null
     }
-    let $container = checkContainerArg(containerElOrString)
+    const $container = checkContainerArg(containerElOrString)
     if (!$container) {
       return null
     }
@@ -709,22 +709,22 @@
     // -------------------------------------------------------------------------
 
     function error (code, msg, obj) {
-        // do nothing if showErrors is not set
+      // do nothing if showErrors is not set
       if (
-          config.hasOwnProperty('showErrors') !== true ||
+        config.hasOwnProperty('showErrors') !== true ||
           config.showErrors === false
-        ) {
+      ) {
         return
       }
 
       let errorText = 'Xiangqiboard Error ' + code + ': ' + msg
 
-        // print to console
+      // print to console
       if (
-          config.showErrors === 'console' &&
+        config.showErrors === 'console' &&
           typeof console === 'object' &&
           typeof console.log === 'function'
-        ) {
+      ) {
         console.log(errorText)
         if (arguments.length >= 2) {
           console.log(obj)
@@ -732,7 +732,7 @@
         return
       }
 
-        // alert errors
+      // alert errors
       if (config.showErrors === 'alert') {
         if (obj) {
           errorText += '\n\n' + JSON.stringify(obj)
@@ -760,10 +760,10 @@
           currentPosition = deepCopy(config.position)
         } else {
           error(
-              7263,
-              'Invalid value passed to config.position.',
-              config.position
-            )
+            7263,
+            'Invalid value passed to config.position.',
+            config.position
+          )
         }
       }
     }
@@ -778,7 +778,7 @@
     // fudge factor, and then keep reducing until we find an exact mod COLUMNS.length for
     // our square size
     function calculateSquareSize () {
-      let containerWidth = parseInt($container.width(), 10)
+      const containerWidth = parseInt($container.width(), 10)
 
       // defensive, prevent infinite loop
       if (!containerWidth || containerWidth <= 0) {
@@ -877,7 +877,7 @@
       }
 
       const css = {}
-      css['background'] = 'url("' + config.boardTheme + '") no-repeat'
+      css.background = 'url("' + config.boardTheme + '") no-repeat'
       css['background-size'] = '100%'
       if (orientation === 'black') {
         // css['transform'] = 'rotate(180deg)'
@@ -892,7 +892,7 @@
       }
 
       // is string
-      return interpolateTemplate(config.pieceTheme, {piece: piece})
+      return interpolateTemplate(config.pieceTheme, { piece: piece })
     }
 
     function buildPieceHTML (piece, hidden, id) {
@@ -1231,11 +1231,11 @@
         // run their onSnapbackEnd function
         if (isFunction(config.onSnapbackEnd)) {
           config.onSnapbackEnd(
-              draggedPiece,
-              draggedPieceSource,
-              deepCopy(currentPosition),
-              currentOrientation
-            )
+            draggedPiece,
+            draggedPieceSource,
+            deepCopy(currentPosition),
+            currentOrientation
+          )
         }
       }
 
@@ -1371,13 +1371,13 @@
       // run onDragMove
       if (isFunction(config.onDragMove)) {
         config.onDragMove(
-            location,
-            draggedPieceLocation,
-            draggedPieceSource,
-            draggedPiece,
-            deepCopy(currentPosition),
-            currentOrientation
-          )
+          location,
+          draggedPieceLocation,
+          draggedPieceSource,
+          draggedPiece,
+          deepCopy(currentPosition),
+          currentOrientation
+        )
       }
 
       // update state
@@ -1424,13 +1424,13 @@
         const oldPosition = deepCopy(currentPosition)
 
         const result = config.onDrop(
-            draggedPieceSource,
-            location,
-            draggedPiece,
-            newPosition,
-            oldPosition,
-            currentOrientation
-          )
+          draggedPieceSource,
+          location,
+          draggedPiece,
+          newPosition,
+          oldPosition,
+          currentOrientation
+        )
         if (result === 'snapback' || result === 'trash') {
           action = result
         }
@@ -1616,7 +1616,7 @@
     }
 
     function mousedownSquare (evt) {
-       // do nothing if we're not draggable
+      // do nothing if we're not draggable
       if (!config.draggable) return
 
       // do nothing if there is no piece on this square
@@ -1638,11 +1638,11 @@
 
       e = e.originalEvent
       beginDraggingPiece(
-          square,
-          currentPosition[square],
-          e.changedTouches[0].pageX,
-          e.changedTouches[0].pageY
-        )
+        square,
+        currentPosition[square],
+        e.changedTouches[0].pageX,
+        e.changedTouches[0].pageY
+      )
     }
 
     function mousedownSparePiece (evt) {
@@ -1662,11 +1662,11 @@
 
       e = e.originalEvent
       beginDraggingPiece(
-          'spare',
-          piece,
-          e.changedTouches[0].pageX,
-          e.changedTouches[0].pageY
-        )
+        'spare',
+        piece,
+        e.changedTouches[0].pageX,
+        e.changedTouches[0].pageY
+      )
     }
 
     function mousemoveWindow (evt) {
@@ -1685,7 +1685,7 @@
       evt.preventDefault()
 
       updateDraggedPiece(evt.originalEvent.changedTouches[0].pageX,
-                         evt.originalEvent.changedTouches[0].pageY)
+        evt.originalEvent.changedTouches[0].pageY)
     }
 
     const throttledTouchmoveWindow = throttle(touchmoveWindow, config.dragThrottleRate)
@@ -1706,7 +1706,7 @@
 
       // get the location
       const location = isXYOnSquare(evt.originalEvent.changedTouches[0].pageX,
-                                    evt.originalEvent.changedTouches[0].pageY)
+        evt.originalEvent.changedTouches[0].pageY)
 
       stopDraggedPiece(location)
     }
@@ -1833,11 +1833,11 @@
   } // end constructor
 
   // TODO: do module exports here
-  window['Xiangqiboard'] = constructor
+  window.Xiangqiboard = constructor
 
   // expose util functions
-  window['Xiangqiboard']['fenToObj'] = fenToObj
-  window['Xiangqiboard']['objToFen'] = objToFen
+  window.Xiangqiboard.fenToObj = fenToObj
+  window.Xiangqiboard.objToFen = objToFen
 })() // end anonymous wrapper
 
 /* export Chessboard object if using node or any other CommonJS compatible environment */
